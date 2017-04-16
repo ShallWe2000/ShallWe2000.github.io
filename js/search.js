@@ -37,7 +37,7 @@ var searchFunc = function(path, search_id, content_id) {
             var $resultContent = document.getElementById(content_id);
 
             $input.addEventListener('input', function(){
-                var str='<ul class=\"search-result-list\">';                
+                var str='Articles including the keyword: <ul class=\"search-result-list\">';                
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                 $resultContent.innerHTML = "";
                 if (this.value.trim().length <= 0) {
@@ -61,8 +61,8 @@ var searchFunc = function(path, search_id, content_id) {
                         keywords.forEach(function(keyword, i) {
                             index_title = data_title.indexOf(keyword);
                             index_content = data_content.indexOf(keyword);
-
-                            if( index_title < 0 && index_content < 0 ){
+ //&& index_content < 0 
+                            if( index_title < 0){
                                 isMatch = false;
                             } else {
                                 if (index_content < 0) {
@@ -83,19 +83,15 @@ var searchFunc = function(path, search_id, content_id) {
                         var content = data.content.trim().replace(/<[^>]+>/g,"");
                         if (first_occur >= 0) {
                             // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
+                            var start = first_occur - 10;
+                            var end = first_occur + 10;
 
                             if(start < 0){
                                 start = 0;
                             }
 
                             if(start == 0){
-                                end = 100;
-                            }
-
-                            if(end > content.length){
-                                end = content.length;
+                                end = 20;
                             }
 
                             var match_content = content.substr(start, end); 
@@ -106,7 +102,7 @@ var searchFunc = function(path, search_id, content_id) {
                                 match_content = match_content.replace(regS, "<em class=\"search-keyword\">"+keyword+"</em>");
                             });
                             
-                            //str += "<p class=\"search-result\">" + match_content +"...</p>"
+                 //           str += "<p class=\"search-result\">" + match_content +"...</p>"
                         }
                         str += "</li>";
                     }
