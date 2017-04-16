@@ -79,7 +79,7 @@ var searchFunc = function(path, search_id, content_id) {
                     }
                     // show search results
                     if (isMatch) {
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        str += "  <li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
                         var content = data.content.trim().replace(/<[^>]+>/g,"");
                         if (first_occur >= 0) {
                             // cut out 100 characters
@@ -106,7 +106,7 @@ var searchFunc = function(path, search_id, content_id) {
                                 match_content = match_content.replace(regS, "<em class=\"search-keyword\">"+keyword+"</em>");
                             });
                             
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                            //str += "<p class=\"search-result\">" + match_content +"...</p>"
                         }
                         str += "</li>";
                     }
