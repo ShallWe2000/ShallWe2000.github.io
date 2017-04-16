@@ -1,0 +1,369 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【bzoj 3166】[Heoi2013]Alo | shallwe|code</title>
+  <meta name="author" content="shallwe">
+  
+  <meta name="description" content="OI-blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【bzoj 3166】[Heoi2013]Alo"/>
+  <meta property="og:site_name" content="shallwe|code"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="shallwe|code" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-97384825-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26e751f78e8841e981f7e01910d5fbf6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">shallwe|code</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friend" title="All the friends.">
+			  <i class="fa fa-link"></i>Friends
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 【bzoj 3166】[Heoi2013]Alo</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>搞了一发可持久化trie树的板子题，一A舒爽</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="题目大意">题目大意</h1>
+<p>区间<span class="math inline">\([l, r]\)</span>的次大值为<span class="math inline">\(k\)</span>, 则该区间的值为<span class="math inline">\(max(k \space xor \space a_p | a_p ≠ k , l ≤ p ≤ r)\)</span>; 求所有区间的值的最大值；</p>
+<h1 id="解题报告">解题报告</h1>
+<p>首先可以找到每个数<span class="math inline">\(a_i\)</span>作为次大值的区间，去除被包含的小区间，可以发现，每个数最多用两个区间就可以表示他作为次大值的区间;</p>
+<p>确定每个数的区间， 需要找到他左侧第一个比他大的数<span class="math inline">\(l_1\)</span>, 第二个比他大的数<span class="math inline">\(l_2\)</span>， 以及他右边第一个比他大的数<span class="math inline">\(r_1\)</span> 和第二个比他大的数<span class="math inline">\(r_2\)</span>, 那么两个区间就是<span class="math inline">\((l_2, r_1)\)</span> 和 <span class="math inline">\((l_1, r_2)\)</span>, 这个很显然；</p>
+<p>寻找<span class="math inline">\(l_1, l_2, r_1, r_2\)</span>可以通过排序+<code>set</code>搞定；</p>
+<p>然后问题变成对于<span class="math inline">\(k\)</span>求区间<span class="math inline">\([l, r]\)</span>中<span class="math inline">\(max(k \space xor \space a_i | l &lt;= i &lt;= r, a_i !=k )\)</span>， 这个是可持久化trie树的裸题；</p>
+<h1 id="代码">代码</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt; </span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> fi first</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> se second</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORU(i, a, b) for (int i = a, nn = int(b); i &lt;= nn; ++i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORD(i, a, b) for (int i = a, nn = int(b); i &gt;= nn; --i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> REP(i, b) for (int i = 0, nn = int(b); i &lt; nn; ++i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> sz(x) (int)(x).size()</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> getTw(a, k) ( (a&gt;&gt;k) &amp; 1)</span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll; </div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">51000</span>; </div><div class="line"><span class="keyword">struct</span> node &#123; </div><div class="line">	<span class="keyword">int</span> son[<span class="number">2</span>], sz; </div><div class="line">&#125; t[N * <span class="number">32</span>];</div><div class="line"></div><div class="line"><span class="keyword">int</span> a[N], n, f[N][<span class="number">4</span>], ans, tot, head[N];</div><div class="line"><span class="comment">// p[x][0] left_first, p[x][1] left_second, p[x][2] right_first, p[x][3] right_first;</span></div><div class="line"><span class="keyword">int</span> aAndp[N];  </div><div class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; place; </div><div class="line"><span class="keyword">char</span> *cp = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">10000000</span>); </div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123; </div><div class="line">	<span class="keyword">for</span>(; *cp &lt; <span class="string">'0'</span> || *cp &gt; <span class="string">'9'</span>; cp++); </div><div class="line">	<span class="keyword">for</span>(x = <span class="number">0</span>; *cp &gt;= <span class="string">'0'</span> &amp;&amp; *cp &lt;= <span class="string">'9'</span>; cp++) </div><div class="line">		x = x * <span class="number">10</span> + *cp - <span class="number">48</span>; </div><div class="line">&#125; </div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; </div><div class="line">	<span class="keyword">return</span> a[x] &lt; a[y]; </div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> &amp;x, <span class="keyword">int</span> f, <span class="keyword">int</span> a, <span class="keyword">int</span> w)</span> </span>&#123; </div><div class="line">	x = ++tot;</div><div class="line">	<span class="keyword">if</span> (f) t[x] = t[f], t[x].sz++;</div><div class="line">	<span class="keyword">else</span> t[x].sz = <span class="number">1</span>; </div><div class="line">	<span class="keyword">if</span> (w &gt;= <span class="number">0</span>) build(t[x].son[getTw(a, w)], t[f].son[getTw(a, w)], a, w<span class="number">-1</span>); </div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">build_trie</span><span class="params">()</span> </span>&#123;</div><div class="line"> 	head[<span class="number">0</span>] = <span class="number">0</span>; </div><div class="line">	FORU(i, <span class="number">1</span>, n) build(head[i], head[i<span class="number">-1</span>], a[i], <span class="number">30</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">trie_ans</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>, d, lson, rson; </div><div class="line">	FORD(k, <span class="number">30</span>, <span class="number">0</span>) &#123;</div><div class="line">		d = getTw(x, k);</div><div class="line">		lson = t[l].son[d^<span class="number">1</span>], rson = t[r].son[d^<span class="number">1</span>];</div><div class="line"> 		<span class="keyword">if</span> (t[rson].sz - t[lson].sz &gt; <span class="number">0</span>) </div><div class="line">			ans |= <span class="number">1</span>&lt;&lt;k, l = lson, r = rson;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			l = t[l].son[d], r = t[r].son[d]; </div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> ans; </div><div class="line">&#125; 	</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">maxify</span><span class="params">(<span class="keyword">int</span> &amp;ans,<span class="keyword">int</span> x)</span> </span>&#123; </div><div class="line">	<span class="keyword">if</span> (x &gt; ans) ans = x; </div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123; </div><div class="line">	fread(cp, <span class="number">1</span>, <span class="number">10000000</span>, <span class="built_in">stdin</span>); 	 </div><div class="line">	in(n); </div><div class="line">	FORU(i, <span class="number">1</span>, n) in(a[i]), aAndp[i] = i;</div><div class="line">	sort(aAndp + <span class="number">1</span>, aAndp + <span class="number">1</span> + n, cmp);</div><div class="line">	<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; :: iterator ps;</div><div class="line">	<span class="keyword">int</span> x, y; </div><div class="line">	FORD(i, n, <span class="number">1</span>) &#123; </div><div class="line">		x = aAndp[i]; </div><div class="line">		ps = place.upper_bound(x); </div><div class="line">		<span class="keyword">if</span> (ps != place.end()) &#123; </div><div class="line">			f[x][<span class="number">2</span>] = *ps, ++ps;</div><div class="line">			<span class="keyword">if</span> (ps != place.end()) f[x][<span class="number">3</span>] = *ps; </div><div class="line">			--ps; </div><div class="line">		&#125; </div><div class="line">		<span class="keyword">if</span> (ps != place.begin()) &#123; </div><div class="line">			--ps, f[x][<span class="number">0</span>] = *ps; </div><div class="line">			<span class="keyword">if</span> (ps != place.begin()) </div><div class="line">				--ps, f[x][<span class="number">1</span>] = *ps; </div><div class="line">		&#125;</div><div class="line">		place.insert(x); </div><div class="line">	&#125; </div><div class="line">	build_trie(); </div><div class="line">	FORU(i, <span class="number">1</span>, n) &#123; </div><div class="line">		<span class="keyword">if</span> (!f[i][<span class="number">2</span>]) f[i][<span class="number">2</span>] = n + <span class="number">1</span>; </div><div class="line">		<span class="keyword">if</span> (!f[i][<span class="number">3</span>]) f[i][<span class="number">3</span>] = n + <span class="number">1</span>; 	</div><div class="line">		<span class="keyword">if</span> (f[i][<span class="number">0</span>]) maxify(ans, trie_ans(a[i], head[f[i][<span class="number">1</span>]], head[f[i][<span class="number">2</span>] - <span class="number">1</span>]) ); </div><div class="line">		<span class="keyword">if</span> (f[i][<span class="number">2</span>] != n+<span class="number">1</span>) maxify(ans, trie_ans(a[i], head[f[i][<span class="number">0</span>]], head[f[i][<span class="number">3</span>] - <span class="number">1</span>]) ); </div><div class="line">	&#125;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>; </div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="原题">原题</h1>
+<a href="http://www.lydsy.com/JudgeOnline/problem.php?id=3166" target="_blank" rel="external">题目链接</a>
+<body>
+<title>
+Problem 3166. – [Heoi2013]Alo
+</title>
+<center>
+<h2>
+3166: [Heoi2013]Alo
+</h2>
+<span class="green">Time Limit: </span>20 Sec  <span class="green">Memory Limit: </span>256 MB<br><span class="green">Submit: </span>874  <span class="green">Solved: </span>416<br>[<a href="submitpage.php?id=3166">Submit</a>][<a href="problemstatus.php?id=3166">Status</a>][<a href="bbs.php?id=3166">Discuss</a>]
+</center>
+<h2>
+Description
+</h2>
+<div class="content">
+<p>
+<span style="font-size: medium">Welcome to ALO ( Arithmetic and Logistic Online)。这是一个VR MMORPG ，<br> 如名字所见，到处充满了数学的谜题。<br> 现在你拥有n颗宝石，每颗宝石有一个能量密度，记为ai，这些宝石的能量<br> 密度两两不同。现在你可以选取连续的一些宝石（必须多于一个）进行融合，设为  ai, ai+1, …, a j，则融合而成的宝石的能量密度为这些宝石中能量密度的次大值<br> 与其他任意一颗宝石的能量密度按位异或的值，即，设该段宝石能量密度次大值<br> 为k，则生成的宝石的能量密度为max{k xor ap | ap ≠ k , i ≤ p ≤ j}。 <br> 现在你需要知道你怎么选取需要融合的宝石，才能使生成的宝石能量密度最大。 <br> </span>
+</p>
+</div>
+<h2>
+Input
+</h2>
+<div class="content">
+<p>
+<font size="4">第一行，一个整数 n，表示宝石个数。 <br> 第二行， n个整数，分别表示a1至an，表示每颗宝石的能量密度，保证对于i ≠ j有 ai ≠ aj。 </font>
+</p>
+</div>
+<h2>
+Output
+</h2>
+<div class="content">
+<p>
+<font size="4">输出一行一个整数，表示最大能生成的宝石能量密度。 <br> </font>
+</p>
+</div>
+<h2>
+Sample Input
+</h2>
+<pre><code>        &lt;div class=&quot;content&quot;&gt;&lt;span class=&quot;sampledata&quot;&gt;5 &lt;br&gt;</code></pre>
+9 2 1 4 7 
+
+<h2>
+Sample Output
+</h2>
+<pre><code>        &lt;div class=&quot;content&quot;&gt;&lt;span class=&quot;sampledata&quot;&gt;14 </code></pre>
+
+
+<h2>
+HINT
+</h2>
+【样例解释】 选择区间[1,5]，最大值为 7 xor 9。 对于 100%的数据有 1 ≤ n ≤ 50000, 0 ≤ ai ≤ 10^9
+<p></p>
+<hr>
+</body>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/【bzoj3155】Preprefix-sum/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/【bzoj1500】维修数列/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div id="uyan_frame"></div>
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-02-14 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/数据结构/">数据结构<span>19</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/STL/">STL<span>5</span></a></li> <li><a href="/tags/可持久化数据结构/">可持久化数据结构<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+ 
+  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131170"></script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2017 shallwe
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

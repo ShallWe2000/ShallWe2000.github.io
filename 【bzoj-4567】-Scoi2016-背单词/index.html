@@ -1,0 +1,320 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【bzoj 4567】[Scoi2016]背单词 | shallwe|code</title>
+  <meta name="author" content="shallwe">
+  
+  <meta name="description" content="OI-blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【bzoj 4567】[Scoi2016]背单词"/>
+  <meta property="og:site_name" content="shallwe|code"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="shallwe|code" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-97384825-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26e751f78e8841e981f7e01910d5fbf6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">shallwe|code</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friend" title="All the friends.">
+			  <i class="fa fa-link"></i>Friends
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 【bzoj 4567】[Scoi2016]背单词</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>SCOI2016Day1 第一道</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="题目链接"><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=4567" target="_blank" rel="external">题目链接</a></h1>
+<h1 id="题目大意">题目大意</h1>
+<p>这个题目的意思非常的模糊， 读到最后才理解了， 是确定一个字符串的编号，如果存在一个字符串后缀的编号<span class="math inline">\(&gt;\)</span>大于这个字符串，那么要付出<span class="math inline">\(n^2\)</span>的巨额代价，否则有付出编号减去后缀最大编号的代价。</p>
+<h1 id="解题报告">解题报告</h1>
+<p>首先后缀倒过来就是前缀，可以通过trie树+重建树得到字符串之间的后缀关系。</p>
+<p>需要一个结论， 就是因为后缀靠后的代价太高， 显然需要让所有的后缀的编号都小于当前串。</p>
+<p>在重构的树上， 有一个可以通过推广得到的结论， 就是编号一定先编完一棵子树再进入另外的一棵子树。</p>
+<p>首先题目中“编号减去后缀最大的编号”相当于当前点的编号减去树上父亲节点的编号。</p>
+<p>考虑二叉树的情况， 联想到’holidy’那个题目， 如下图(1)(2), 其中第一个图显然更优。</p>
+<div class="figure">
+<img src="/【bzoj-4567】-Scoi2016-背单词/1.png">
+
+</div>
+<p>在二叉树中，显然先进入较短的一侧可以付出更小的代价， 所以推广到多叉树，先进入<code>size</code>较小的子树代价更小。</p>
+<h1 id="代码">代码</h1>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt; </span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,a,b) for(int i=int(a),nn=int(b);i&lt;=nn;++i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> vep(i,a,b) for(int i=int(a),nn=int(b);i&gt;=nn;--i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> xep(i,b) for(int i=0,nn=int(b);i&lt;nn;++i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii; </div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">110001</span>; </div><div class="line"><span class="keyword">struct</span> edge &#123; </div><div class="line">	<span class="keyword">int</span> nxt,to; edge(<span class="keyword">int</span> nxt=<span class="number">0</span>,<span class="keyword">int</span> to=<span class="number">0</span>) </div><div class="line">		:nxt(nxt),to(to) &#123;&#125;</div><div class="line">&#125; e[N]; </div><div class="line"><span class="keyword">int</span> hed[N],tot,n,sn[N*<span class="number">5</span>][<span class="number">26</span>],na[N*<span class="number">5</span>],cnt=<span class="number">1</span>,rt=<span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> sz[N],rc; <span class="keyword">char</span> s[N*<span class="number">5</span>]; </div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span> </span>&#123; </div><div class="line">	e[++tot]=edge(hed[x],y), hed[x]=tot; </div><div class="line">&#125; </div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">rvs_ins</span><span class="params">(<span class="keyword">char</span> *s,<span class="keyword">int</span> id)</span> </span>&#123; </div><div class="line">	<span class="keyword">int</span> x=rt,no; vep(i,<span class="built_in">strlen</span>(s)<span class="number">-1</span>,<span class="number">0</span>) &#123; </div><div class="line">		no=s[i]-<span class="string">'a'</span>; <span class="keyword">if</span> (!sn[x][no]) sn[x][no]=++cnt; </div><div class="line">		x=sn[x][no]; <span class="keyword">if</span> (i==<span class="number">0</span>) na[x]=id+<span class="number">1</span>;  </div><div class="line">	&#125; </div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> f)</span> </span>&#123; </div><div class="line">	<span class="keyword">if</span> (na[x]) add(f,na[x]), f=na[x]; </div><div class="line">	xep(i,<span class="number">26</span>) <span class="keyword">if</span> (sn[x][i]) build(sn[x][i],f); </div><div class="line">&#125; </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; </div><div class="line">	sz[x]=<span class="number">1</span>; <span class="keyword">for</span> (<span class="keyword">int</span> i=hed[x];i;i=e[i].nxt) </div><div class="line">		dfs(e[i].to), sz[x]+=sz[e[i].to]; </div><div class="line">&#125; </div><div class="line"><span class="keyword">int</span> v[N],od[N]; <span class="keyword">long</span> <span class="keyword">long</span> as;  </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">got</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> fm)</span> </span>&#123; </div><div class="line">	<span class="keyword">if</span> (x) v[x]=++rc, as+=v[x]-v[fm]; </div><div class="line">	<span class="built_in">vector</span>&lt;pii&gt; ss; </div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=hed[x];i;i=e[i].nxt) </div><div class="line">		ss.push_back(mp(sz[e[i].to],e[i].to)); </div><div class="line">	sort(ss.begin(),ss.end()); </div><div class="line">	xep(i,ss.size()) got(ss[i].second,x); </div><div class="line">&#125; </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123; </div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);  </div><div class="line">	xep(i,n) <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s), rvs_ins(s,i); </div><div class="line">	build(<span class="number">1</span>,<span class="number">0</span>), dfs(<span class="number">0</span>), got(<span class="number">0</span>,<span class="number">-1</span>); </div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,as); </div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/codechef-选做-3/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/【bzoj-4568】-Scoi2016-幸运数字/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div id="uyan_frame"></div>
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-03-18 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/字符串题/">字符串题<span>4</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/贪心/">贪心<span>3</span></a></li> <li><a href="/tags/trie树/">trie树<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+ 
+  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131170"></script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2017 shallwe
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
