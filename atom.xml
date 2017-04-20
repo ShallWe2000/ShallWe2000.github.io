@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://shallwe.ga/"/>
-  <updated>2017-04-16T02:21:57.442Z</updated>
+  <updated>2017-04-16T02:23:40.904Z</updated>
   <id>http://shallwe.ga/</id>
   
   <author>
@@ -14,46 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>【bzoj 4570】[Scoi2016]妖怪</title>
-    <link href="http://shallwe.ga/%E3%80%90bzoj-4570%E3%80%91-Scoi2016-%E5%A6%96%E6%80%AA/"/>
-    <id>http://shallwe.ga/【bzoj-4570】-Scoi2016-妖怪/</id>
-    <published>2017-03-22T13:46:47.000Z</published>
-    <updated>2017-04-16T02:21:57.442Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>SCOI2016Day2 第一道</p>
-</blockquote>
-<a id="more"></a>
-<h1 id="题目链接"><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=4570" target="_blank" rel="external">题目链接</a></h1>
-<h1 id="题目大意">题目大意</h1>
-<p><span class="math inline">\(n\)</span>只妖怪，分别有<span class="math inline">\(x,y\)</span>两个属性，求<span class="math inline">\((a,b)\)</span>使得<span class="math inline">\(max \left \lbrace x+y+ \frac{x*b}{a} + \frac{y*a}{b} \right \rbrace\)</span> 最小。</p>
-<h1 id="解题报告">解题报告</h1>
-<p>设<span class="math inline">\(k=-\frac{b}{a},b=x+y-kx-\frac{y}{k}\)</span>, 则 <span class="math display">\[
-\begin{aligned}
-y &amp;=-kx+\frac{k+1}{k}b\\
-&amp;=-kx+b+\frac{1}{k}*b
-\end{aligned}
-\]</span></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;SCOI2016Day2 第一道&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="数学题" scheme="http://shallwe.ga/categories/%E6%95%B0%E5%AD%A6%E9%A2%98/"/>
-    
-    
-      <category term="凸包" scheme="http://shallwe.ga/tags/%E5%87%B8%E5%8C%85/"/>
-    
-      <category term="高中课标" scheme="http://shallwe.ga/tags/%E9%AB%98%E4%B8%AD%E8%AF%BE%E6%A0%87/"/>
-    
-  </entry>
   
   <entry>
     <title>【bzoj 4569】[Scoi2016]萌萌哒</title>
@@ -1799,6 +1759,47 @@ HINT
     
     
       <category term="博弈" scheme="http://shallwe.ga/tags/%E5%8D%9A%E5%BC%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【bzoj 4423】[AMPPZ2013]Bytehattan</title>
+    <link href="http://shallwe.ga/%E3%80%90Bzoj%204423%E3%80%91%5BAMPPZ2013%5DBytehattan/"/>
+    <id>http://shallwe.ga/【Bzoj 4423】[AMPPZ2013]Bytehattan/</id>
+    <published>2017-01-01T15:00:00.000Z</published>
+    <updated>2017-04-16T02:24:50.002Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>利用到了网格图的性质</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="题目">题目</h1>
+<center>
+<h2>
+4423: [AMPPZ2013]Bytehattan
+</h2>
+Time Limit: 3 Sec Memory Limit: 128 MB
+</center>
+<h2 id="description">Description</h2>
+<p>比特哈顿镇有<span class="math inline">\(n*n\)</span>个格点，形成了一个网格图。一开始整张图是完整的。 有<span class="math inline">\(k\)</span>次操作，每次会删掉图中的一条边<span class="math inline">\((u,v)\)</span>，你需要回答在删除这条边之后<span class="math inline">\(u\)</span>和<span class="math inline">\(v\)</span>是否仍然连通。</p>
+<h2 id="input">Input</h2>
+<p>第一行包含两个正整数<span class="math inline">\(n,k\)</span>(<span class="math inline">\(2&lt;=n&lt;=1500,1&lt;=k&lt;=2n(n-1)\)</span>)，表示网格图的大小以及操作的个数。 接下来<span class="math inline">\(k\)</span>行，每行包含两条信息，每条信息包含两个正整数<span class="math inline">\(a,b\)</span>(<span class="math inline">\(1&lt;=a,b&lt;=n\)</span>)以及一个字符<span class="math inline">\(c\)</span>(<span class="math inline">\(c=N\)</span>或者<span class="math inline">\(E\)</span>)。 如果<span class="math inline">\(c=N\)</span>，表示删除<span class="math inline">\((a,b)\)</span>到<span class="math inline">\((a,b+1)\)</span>这条边；如果<span class="math inline">\(c=E\)</span>，表示删除<span class="math inline">\((a,b)\)</span>到<span class="math inline">\((a+1,b)\)</span>这条边。 数据进行了加密，对于每个操作，如果上一个询问回答为TAK或者这是第一个操作，那么只考虑第一条信息，否则只考虑第二条信息。 数据保证每条边最多被删除一次。 ## Output 输出<span class="math inline">\(k\)</span>行，对于每个询问，如果仍然连通，输出TAK，否则输出NIE。 # 解题报告 网格图？考虑对偶图的性质，当前一条边，如果它所隔开的两个格子在对偶图中已经联通，说明两点之间的边如果删除，就会形成割，两点也就不连通了。 <img src="https://leanote.com/api/file/getImage?fileId=57db61c4ab6441695200d2b2" alt="图片标题"> 所以并查集搞一下 # 代码 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1501</span>; </div><div class="line"><span class="keyword">int</span> f[N*N],lastans,n,k,id[N][N];</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123;</div><div class="line">	<span class="keyword">char</span> ch=getchar(); </div><div class="line">	<span class="keyword">for</span> (;ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>;ch=getchar());</div><div class="line">	<span class="keyword">for</span> (x=<span class="number">0</span>;ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>;ch=getchar())</div><div class="line">		x=x*<span class="number">10</span>+ch<span class="number">-48</span>; </div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">num</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (x&lt;=<span class="number">0</span>||y&lt;=<span class="number">0</span>||x&gt;=n||y&gt;=n) <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">	<span class="keyword">return</span> id[x][y]; </div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (f[x]!=x) f[x]=find(f[x]); </div><div class="line">	<span class="keyword">return</span> f[x]; </div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">char</span> type)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> one,two,x,y,fx,fy; </div><div class="line">	<span class="keyword">if</span> (type==<span class="string">'N'</span>) &#123;</div><div class="line">		x=a<span class="number">-1</span>,y=b,one=num(x,y); </div><div class="line">		x=a,y=b,two=num(x,y); </div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		x=a,y=b<span class="number">-1</span>,one=num(x,y); </div><div class="line">		x=a,y=b,two=num(x,y); </div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> ((fx=find(one))==(fy=find(two)))</div><div class="line">		lastans=<span class="number">0</span>;</div><div class="line">	<span class="keyword">else</span> </div><div class="line">		lastans=<span class="number">1</span>,f[fx]=fy; </div><div class="line">	<span class="keyword">if</span> (lastans) <span class="built_in">printf</span>(<span class="string">"TAK\n"</span>); </div><div class="line">	<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"NIE\n"</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="comment">//	freopen("4423.in","r",stdin); </span></div><div class="line"><span class="comment">//	freopen("4423(1).out","w",stdout);</span></div><div class="line">	in(n),in(k); <span class="keyword">int</span> x=(n<span class="number">-1</span>)*(n<span class="number">-1</span>),y,x1,y1;</div><div class="line">	<span class="keyword">char</span> s1[<span class="number">10</span>],s2[<span class="number">10</span>]; </div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=x;i++) f[i]=i; </div><div class="line">	<span class="keyword">int</span> tmp=<span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++) </div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;n;j++) </div><div class="line">			id[i][j]=++tmp;</div><div class="line">	lastans=<span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=k;i++) &#123;</div><div class="line">		in(x),in(y);<span class="built_in">scanf</span>(<span class="string">"%s"</span>,s1);</div><div class="line">		in(x1),in(y1);<span class="built_in">scanf</span>(<span class="string">"%s"</span>,s2); </div><div class="line">		<span class="keyword">if</span> (!lastans) </div><div class="line">			swap(x,x1),swap(y,y1),swap(s1,s2); </div><div class="line">		work(x,y,s1[<span class="number">0</span>]); </div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;利用到了网格图的性质&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="图论题" scheme="http://shallwe.ga/categories/%E5%9B%BE%E8%AE%BA%E9%A2%98/"/>
+    
+    
+      <category term="并查集" scheme="http://shallwe.ga/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+    
+      <category term="平面图" scheme="http://shallwe.ga/tags/%E5%B9%B3%E9%9D%A2%E5%9B%BE/"/>
     
   </entry>
   

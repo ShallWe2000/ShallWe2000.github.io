@@ -144,7 +144,7 @@ var _hmt = _hmt || [];
 <a id="more"></a>
 <h1 id="题目">题目</h1>
 <h2 id="题目描述">题目描述</h2>
-<p>一个有序序列 $ a _1,…,a_n $ 是合法的，当且仅当 ： - 长度为<span class="math inline">\(n\)</span>； - 其中的数两两不同； - <span class="math inline">\(a_i \in [1,A]\)</span> 对所有的<span class="math inline">\(i\)</span>成立; 一个序列的值<span class="math inline">\(val(a)= \prod _{i=1} ^{i=n} a_i\)</span>; 求所有不同序列的值的和 <span class="math inline">\(\pmod p\)</span>,<span class="math inline">\(p\)</span>为素数.</p>
+<p>一个有序序列 <span class="math inline">\(a_1,...,a_n\)</span> 是合法的，当且仅当 ： * 长度为<span class="math inline">\(n\)</span>； * 其中的数两两不同； * <span class="math inline">\(a_i \in [1,A]\)</span> 对所有的<span class="math inline">\(i\)</span>成立; 一个序列的值<span class="math inline">\(val(a)= \prod_{i=1} ^{i=n} a_i\)</span>; 求所有不同序列的值的和 <span class="math inline">\(\pmod p\)</span>,<span class="math inline">\(p\)</span>为素数.</p>
 <h2 id="数据范围">数据范围</h2>
 <ul>
 <li><span class="math inline">\(100 \% : A,p \leq 10^9, n \leq 500, p&gt;A&gt;n+1\)</span></li>
@@ -155,8 +155,8 @@ var _hmt = _hmt || [];
 <li>考虑数列中的数是<span class="math inline">\(distinct\)</span>的，那么可以先规定一个递增的顺序，然后乘一个全排列；</li>
 <li>观察数据范围，<span class="math inline">\(A\)</span>很大，考虑<strong>倍增</strong>，令<span class="math inline">\(f[A][n]\)</span>表示在<span class="math inline">\([1,A]\)</span>中选<span class="math inline">\(n\)</span>个数；
 <ul>
-<li>计算<span class="math inline">\(f[2A][n]\)</span>:记从<span class="math inline">\([A+1,2A]\)</span>中选<span class="math inline">\(n\)</span>个数的值为<span class="math inline">\(b_i\)</span>，考虑在<span class="math inline">\([1,A]\)</span>中选<span class="math inline">\(a\)</span>个数，在<span class="math inline">\([A+1,2A]\)</span>中选<span class="math inline">\(n-a\)</span>个数; <span class="math display">\[b\_i= \Sigma \_{j=0}^{j=i} A^{i-j} * a_j * C\_{i-j}^{A-j}\]</span></li>
-<li>如何快速求<span class="math inline">\(C\_{i-j}^{A-j}\)</span>,化简得 <span class="math display">\[C\_{i-j}^{A-j}= \frac{(A-j)!}{(i-j)!(A-i)!}= \prod\_{k=i}^{k=j}(A-k) *(i-j)!^{-1}\]</span> 这就可以做了。</li>
+<li>计算<span class="math inline">\(f[2A][n]\)</span>:记从<span class="math inline">\([A+1,2A]\)</span>中选<span class="math inline">\(n\)</span>个数的值为<span class="math inline">\(b_i\)</span>，考虑在<span class="math inline">\([1,A]\)</span>中选<span class="math inline">\(a\)</span>个数，在<span class="math inline">\([A+1,2A]\)</span>中选<span class="math inline">\(n-a\)</span>个数; <span class="math display">\[b_i= \Sigma_{j=0}^{j=i} A^{i-j} * a_j * C_{i-j}^{A-j}\]</span></li>
+<li>如何快速求<span class="math inline">\(C_{i-j}^{A-j}\)</span>,化简得 <span class="math display">\[C_{i-j}^{A-j}= \frac{(A-j)!}{(i-j)!(A-i)!}= \prod_{k=i}^{k=j}(A-k) *(i-j)!^{-1}\]</span> 这就可以做了。</li>
 <li>然后？ <span class="math display">\[f[2A][n]=f[A][a]*b[n-a]\]</span></li>
 </ul></li>
 <li>时间复杂度： <span class="math inline">\(O(log A n^2)\)</span> 可以<span class="math inline">\(fft\)</span>优化下，<span class="math inline">\(noip\)</span>后补一下；</li>
@@ -255,7 +255,7 @@ var jiathis_config = {data_track_clickback:'true'};
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/categories/数学题/">数学题<span>10</span></a></li>
+    <li><a href="/categories/数学题/">数学题<span>9</span></a></li>
   </li>
 
     </ul>
@@ -313,7 +313,7 @@ var jiathis_config = {data_track_clickback:'true'};
   <span>▲</span> 
 </a>
 
-<script type="text/javascript" opacity='1' zIndex="-1" count="250" src="/js/src/particle.js"></script>  
+<script type="text/javascript" color="41,36,33" opacity='0.8' zIndex="-2" count="100" src="/js/src/particle.js"></script>  
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 <script src="/js/bootstrap.min.js"></script>
