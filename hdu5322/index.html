@@ -1,0 +1,318 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【HDU-5322】Hope | shallwe|code</title>
+  <meta name="author" content="shallwe">
+  
+  <meta name="description" content="OI-blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【HDU-5322】Hope"/>
+  <meta property="og:site_name" content="shallwe|code"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="shallwe|code" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-97384825-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26e751f78e8841e981f7e01910d5fbf6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">shallwe|code</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>归档页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>分类页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>标签页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friend" title="All the friends.">
+			  <i class="fa fa-link"></i>小伙伴
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>博主是个蒟蒻
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 【HDU-5322】Hope</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>明明是一个代码超短，啥高级东西都不需要的化式子题，硬生生地上了分治FFT</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="题目大意">题目大意</h1>
+<p>对于一个排列<span class="math inline">\(P\)</span> , 如果存在最小的<span class="math inline">\(j, j&gt;i, p[j]&gt;p[i]\)</span> , 那么从<span class="math inline">\(i\)</span>向<span class="math inline">\(j\)</span>连一条边, 每个联通分量对答案的贡献是<span class="math inline">\(sz^2\)</span> , 问长度为<span class="math inline">\(n\)</span>的所有排列的总贡献 。</p>
+<h1 id="解题报告">解题报告</h1>
+<p>从<span class="math inline">\(1\)</span>到<span class="math inline">\(n\)</span>枚举<span class="math inline">\(i\)</span>, 枚举<span class="math inline">\(i\)</span>插入的位置， 显然<span class="math inline">\(i\)</span>会将排列形成的连通图分成前后两部分, 所以可以得到:</p>
+<p><span class="math display">\[f[i] = \sum_{j=1}^i C_{i-1}^{j-1} * (j-1)! * j^2 * f[i-j]\]</span></p>
+<p>再化一次,</p>
+<p><span class="math display">\[f[i] = (i-1)! \sum_{j=1}^{i}j^2 * \frac{f[i-j]}{(i-j)！}\]</span></p>
+<p>这样就可以分治fft做了, 但是好像可以继续化简.</p>
+<p><span class="math display">\[f[i] = (i-1)! * \sum_{k=1}^{i} \frac{f[k]}{k!} * (i-k)^2\]</span> <span class="math display">\[= (i-1)! * \sum_{k=1}^{i} \frac{f[k]}{k!} * (i^2 - 2k * i +k^2)\]</span></p>
+<p>令 <span class="math inline">\(A[k]=\frac{f[k]}{k!}, B[k] = \frac{f[k]*k}{k!}, C[k] = \frac{f[k]*k^2}{k!}\)</span> , 就可以<span class="math inline">\(O(1)\)</span>得到<span class="math inline">\(f[i]\)</span> .</p>
+<p>显然， <span class="math inline">\(A, B, C\)</span>可以通过<span class="math inline">\(O(1)\)</span>的递推得到。</p>
+<p>所以复杂度是<span class="math inline">\(O(n)\)</span> .</p>
+<h1 id="代码">代码</h1>
+<ul>
+<li>FFT</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt; </span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORU(i, a, b) for (int i = int(a), nn = int(b); i &lt;= nn; ++i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORD(i, a, b) for (int i = int(a), nn = int(b); i &gt;= nn; --i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> REP(i, b) for (int i = 0, nn = int(b); i &lt; b; ++i) </span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll; </div><div class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> ff; </div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">100001</span>,p=<span class="number">998244353</span>;</div><div class="line"><span class="keyword">int</span> dp[N], fac[N], inv[N], n;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fast</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> k)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span>(; k; k &gt;&gt;= <span class="number">1</span>, x = <span class="number">1L</span>L*x*x%p)</div><div class="line">		<span class="keyword">if</span> (k &amp; <span class="number">1</span>) ans = <span class="number">1L</span>L*ans*x%p;</div><div class="line">	<span class="keyword">return</span> ans;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</div><div class="line">	fac[<span class="number">0</span>] = inv[<span class="number">0</span>]=<span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i &lt; N; ++i)</div><div class="line">		fac[i] = <span class="number">1L</span>L * fac[i<span class="number">-1</span>] * i % p;</div><div class="line">	inv[N<span class="number">-1</span>] = fast(fac[N<span class="number">-1</span>], p<span class="number">-2</span>); </div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=N<span class="number">-2</span>; i; --i) </div><div class="line">		inv[i] = <span class="number">1L</span>L * inv[i+<span class="number">1</span>] * (i+<span class="number">1</span>) % p; </div><div class="line">	<span class="keyword">int</span> sum1=<span class="number">0</span>, sum2=<span class="number">0</span>, sum3=<span class="number">0</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;N; ++i)&#123;</div><div class="line">		<span class="keyword">if</span>(!i)	dp[i]=<span class="number">1</span>;</div><div class="line">		<span class="keyword">else</span> dp[i]=<span class="number">1L</span>L*fac[i<span class="number">-1</span>]*((<span class="number">1L</span>L*i*i%p*sum1%p - <span class="number">2l</span>l*i*sum2%p + sum3)%p+p)%p;</div><div class="line">		sum1 = (sum1 + <span class="number">1L</span>L*dp[i]*inv[i])%p;</div><div class="line">		sum2 = (sum2 + <span class="number">1L</span>L*i*dp[i]%p*inv[i])%p;</div><div class="line">		sum3 = (sum3 + <span class="number">1L</span>L*i*i%p*dp[i]%p*inv[i])%p;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	solve();</div><div class="line">	<span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n))</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,dp[n]);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>更好的做法</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt; </span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORU(i, a, b) for (int i = int(a), nn = int(b); i &lt;= nn; ++i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORD(i, a, b) for (int i = int(a), nn = int(b); i &gt;= nn; --i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> REP(i, b) for (int i = 0, nn = int(b); i &lt; b; ++i) </span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll; </div><div class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> ff; </div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">100001</span>,p=<span class="number">998244353</span>;</div><div class="line"><span class="keyword">int</span> dp[N], fac[N], inv[N], n;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fast</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> k)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span>(; k; k &gt;&gt;= <span class="number">1</span>, x = <span class="number">1L</span>L*x*x%p)</div><div class="line">		<span class="keyword">if</span> (k &amp; <span class="number">1</span>) ans = <span class="number">1L</span>L*ans*x%p;</div><div class="line">	<span class="keyword">return</span> ans;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</div><div class="line">	fac[<span class="number">0</span>] = inv[<span class="number">0</span>]=<span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i &lt; N; ++i)</div><div class="line">		fac[i] = <span class="number">1L</span>L * fac[i<span class="number">-1</span>] * i % p;</div><div class="line">	inv[N<span class="number">-1</span>] = fast(fac[N<span class="number">-1</span>], p<span class="number">-2</span>); </div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=N<span class="number">-2</span>; i; --i) </div><div class="line">		inv[i] = <span class="number">1L</span>L * inv[i+<span class="number">1</span>] * (i+<span class="number">1</span>) % p; </div><div class="line">	<span class="keyword">int</span> sum1=<span class="number">0</span>, sum2=<span class="number">0</span>, sum3=<span class="number">0</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;N; ++i)&#123;</div><div class="line">		<span class="keyword">if</span>(!i)	dp[i]=<span class="number">1</span>;</div><div class="line">		<span class="keyword">else</span> dp[i]=<span class="number">1L</span>L*fac[i<span class="number">-1</span>]*((<span class="number">1L</span>L*i*i%p*sum1%p - <span class="number">2l</span>l*i*sum2%p + sum3)%p+p)%p;</div><div class="line">		sum1 = (sum1 + <span class="number">1L</span>L*dp[i]*inv[i])%p;</div><div class="line">		sum2 = (sum2 + <span class="number">1L</span>L*i*dp[i]%p*inv[i])%p;</div><div class="line">		sum3 = (sum3 + <span class="number">1L</span>L*i*i%p*dp[i]%p*inv[i])%p;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	solve();</div><div class="line">	<span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n))</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,dp[n]);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/hdu5730/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/cf/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+
+        
+<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5906fa0032e696c9"></script> 
+
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div id="uyan_frame"></div>
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-02-14 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/数学题/">数学题<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/FFT/">FFT<span>5</span></a></li> <li><a href="/tags/CDQ分治/">CDQ分治<span>2</span></a></li> <li><a href="/tags/递推/">递推<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#题目大意"><span class="toc-article-text">题目大意</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#解题报告"><span class="toc-article-text">解题报告</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#代码"><span class="toc-article-text">代码</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+ 
+  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131170"></script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2017 shallwe
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script type="text/javascript" color="0,0,0" opacity='1.0' zIndex="-2" count="200" src="/js/src/particle.js"></script>  
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

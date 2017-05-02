@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【bzoj 2555】SubString | shallwe|code</title>
+  <meta name="author" content="shallwe">
+  
+  <meta name="description" content="OI-blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【bzoj 2555】SubString"/>
+  <meta property="og:site_name" content="shallwe|code"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="shallwe|code" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-97384825-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26e751f78e8841e981f7e01910d5fbf6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">shallwe|code</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>归档页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>分类页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>标签页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friend" title="All the friends.">
+			  <i class="fa fa-link"></i>小伙伴
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>博主是个蒟蒻
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 【bzoj 2555】SubString</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>一个LCT+SAM的大板子题</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="题目">题目</h1>
+<center>
+<h2>
+2555: SubString
+</h2>
+Time Limit: <span class="math inline">\(30\)</span> <strong>Sec</strong> Memory Limit: <span class="math inline">\(512\)</span> <strong>MB</strong>
+</center>
+<h2 id="description">Description</h2>
+<p>懒得写背景了，给你一个字符串<span class="math inline">\(init\)</span>，要求你支持两个操作 (1):在当前字符串的后面插入一个字符串 (2):询问字符串<span class="math inline">\(s\)</span>在当前字符串中出现了几次？(作为连续子串) 你必须在线支持这些操作。</p>
+<h2 id="input">Input</h2>
+<p>第一行一个数<span class="math inline">\(Q\)</span>表示操作个数 第二行一个字符串表示初始字符串<code>init</code> 接下来<span class="math inline">\(Q\)</span>行，每行2个字符串<code>Type,Str</code> <code>Type</code>是<code>ADD</code>的话表示在后面插入字符串。 <code>Type</code>是<code>QUERY</code>的话表示询问某字符串在当前字符串中出现了几次。 为了体现在线操作，你需要维护一个变量<code>mask</code>，初始值为<span class="math inline">\(0\)</span> 读入串<code>Str</code>之后，使用这个过程将之解码成真正询问的串<code>TrueStr</code>。 询问的时候，对<code>TrueStr</code>询问后输出一行答案<code>Result</code> 然后<code>mask = mask xor Result</code><br>
+插入的时候，将TrueStr插到当前字符串后面即可。 ### HINT:<code>ADD</code>和<code>QUERY</code>操作的字符串都需要解压 <span class="math inline">\(100\%\)</span> 的数据字符串最终长度 <span class="math inline">\(&lt;=600000\)</span>，询问次数<span class="math inline">\(&lt;=10000\)</span>,询问总长度<span class="math inline">\(&lt;= 3000000\)</span> ## 数据范围 <span class="math inline">\(100\%\)</span> 的数据字符串最终长度<span class="math inline">\(&lt;=600000\)</span>，询问次数<span class="math inline">\(&lt;=10000\)</span>,询问总长度<span class="math inline">\(&lt;= 3000000\)</span> # 解题报告 算法想起来真是不麻烦，在线插入字符用<strong>后缀自动机</strong>解决很简便，出现次数在<strong>后缀自动机</strong>中子串出现次数用<code>right</code>集合大小表示，<code>right</code>可以在<code>parent</code>树上统计，实际上是<strong>查询子树和</strong>操作； <strong>parent</strong>树需要<strong>删边+加边</strong>，考虑用<strong>LCT</strong>搞，但是<strong>LCT</strong>不能统计子树信息，无所谓，当点<span class="math inline">\(sm[x]+=1\)</span>,令<span class="math inline">\(x\)</span>到根路径上所有点<span class="math inline">\(sm[y]+=1\)</span>，这样需要<strong>LCT</strong>是一棵有根<strong>LCT</strong>,<strong>splay</strong>中的信息不从左右儿子转移，而是由<strong>标记</strong>从上向下修改； 上午调了好久，因为lct的<strong>板子</strong>有个地方打错了，就是<code>rotate</code>中所有循环终止条件都应该是<code>root(x)</code>，昨天打残<code>splay</code>，复习板子又把<code>lct</code>搞坏了，真是省选滚粗节奏呀! # 代码 不是很长，但可以用<strong>后缀平衡树或二分+普通平衡树+sa</strong>取代，想学习一下； <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1200002</span>; </div><div class="line"><span class="keyword">int</span> mask=<span class="number">0</span>,Q; </div><div class="line"><span class="keyword">char</span> s[<span class="number">3000001</span>],type[<span class="number">20</span>];</div><div class="line"><span class="built_in">string</span> chars; </div><div class="line"><span class="keyword">struct</span> LCT &#123;</div><div class="line">	<span class="keyword">int</span> son[N][<span class="number">2</span>],f[N],mark[N],sm[N],sta[N]; </div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">root</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> (son[f[x]][<span class="number">0</span>]!=x&amp;&amp;son[f[x]][<span class="number">1</span>]!=x); </div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (!x) <span class="keyword">return</span>;</div><div class="line">		sm[x]+=y, mark[x]+=y; </div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">down</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (mark[x]) &#123; </div><div class="line">			<span class="keyword">if</span> (son[x][<span class="number">1</span>]) add(son[x][<span class="number">1</span>],mark[x]); </div><div class="line">			<span class="keyword">if</span> (son[x][<span class="number">0</span>]) add(son[x][<span class="number">0</span>],mark[x]); </div><div class="line">			mark[x]=<span class="number">0</span>; </div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> y=f[x],z=f[y],d=(son[y][<span class="number">1</span>]==x); </div><div class="line">		f[son[x][d^<span class="number">1</span>]]=y,son[y][d]=son[x][d^<span class="number">1</span>]; </div><div class="line">		<span class="keyword">if</span> (!root(y)) son[z][son[z][<span class="number">1</span>]==y]=x; </div><div class="line">		f[x]=z,f[y]=x,son[x][d^<span class="number">1</span>]=y; </div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">splay</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> top=<span class="number">1</span>,i=x; sta[top]=x; </div><div class="line">		<span class="keyword">while</span> (!root(i)) sta[++top]=i=f[i]; </div><div class="line">		<span class="keyword">while</span> (top) down(sta[top]),top--; </div><div class="line">		<span class="keyword">for</span> (i=f[x];!root(x);rotate(x),i=f[x]) &#123;</div><div class="line">			<span class="keyword">if</span> (root(i)) <span class="keyword">continue</span>; </div><div class="line">			<span class="keyword">if</span> ((son[i][<span class="number">1</span>]==x)^(son[f[i]][<span class="number">1</span>]==i)) rotate(x); </div><div class="line">			<span class="keyword">else</span> rotate(i);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">access</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">		 <span class="keyword">for</span> (<span class="keyword">int</span> t=<span class="number">0</span>;x;t=x,x=f[x]) </div><div class="line">		 	splay(x),son[x][<span class="number">1</span>]=t;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">link</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line">		f[x]=y,access(y),splay(y),add(y,sm[x]); </div><div class="line">	&#125; </div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">cut</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">		access(x),splay(x),add(son[x][<span class="number">0</span>],-sm[x]); </div><div class="line">		f[son[x][<span class="number">0</span>]]=<span class="number">0</span>, son[x][<span class="number">0</span>]=<span class="number">0</span>; </div><div class="line">	&#125;</div><div class="line">&#125; lct; </div><div class="line"><span class="keyword">struct</span> SAM &#123;</div><div class="line">	<span class="keyword">int</span> son[N][<span class="number">100</span>],val[N],par[N]; </div><div class="line">	<span class="keyword">int</span> p,q,np,nq,root,last,cnt; </div><div class="line">	SAM() &#123; root=last=cnt=<span class="number">1</span>; &#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">getstring</span><span class="params">(<span class="keyword">int</span> mask)</span> </span>&#123;</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%s"</span>,s),chars=s; </div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;chars.length();++j) &#123;</div><div class="line">        	mask=(mask*<span class="number">131</span>+j)%chars.length();</div><div class="line">        	<span class="keyword">char</span> t=chars[j];</div><div class="line">        	chars[j]=chars[mask],chars[mask]=t;</div><div class="line">    	&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">		p=last,np=++cnt,last=np,lct.sm[np]=<span class="number">1</span>,val[np]=val[p]+<span class="number">1</span>; </div><div class="line">		<span class="keyword">while</span> (p&amp;&amp;!son[p][x]) son[p][x]=np,p=par[p]; </div><div class="line">		<span class="keyword">if</span> (!p) par[np]=root, lct.link(np,root); </div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			q=son[p][x]; </div><div class="line">			<span class="keyword">if</span> (val[p]+<span class="number">1</span>==val[q]) par[np]=q,lct.link(np,q); </div><div class="line">			<span class="keyword">else</span> &#123;</div><div class="line">				 nq=++cnt, val[nq]=val[p]+<span class="number">1</span>,lct.sm[nq]=<span class="number">0</span>; </div><div class="line">				 <span class="built_in">memcpy</span>(son[nq],son[q],<span class="keyword">sizeof</span>(son[q])); </div><div class="line">				 par[nq]=par[q],lct.link(nq,par[q]); </div><div class="line">				 par[q]=par[np]=nq,lct.cut(q); </div><div class="line">				 lct.link(q,nq),lct.link(np,nq);</div><div class="line">				 <span class="keyword">while</span> (p&amp;&amp;son[p][x]==q) son[p][x]=nq,p=par[p];</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">()</span> </span>&#123; </div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%s"</span>,s); <span class="keyword">int</span> l=<span class="built_in">strlen</span>(s); </div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;l;++i) insert(s[i]-<span class="string">'A'</span>); </div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</div><div class="line">		getstring(mask); <span class="keyword">int</span> l=chars.length();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;l;++i) </div><div class="line">			insert(chars[i]-<span class="string">'A'</span>); </div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">()</span> </span>&#123;</div><div class="line">		getstring(mask); <span class="keyword">int</span> l=chars.length(),i,x;</div><div class="line">		<span class="keyword">for</span> (i=<span class="number">0</span>,x=root;i&lt;l;++i)</div><div class="line">			<span class="keyword">if</span> (son[x][chars[i]-<span class="string">'A'</span>]) x=son[x][chars[i]-<span class="string">'A'</span>]; </div><div class="line">			<span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">		lct.splay(x);  </div><div class="line">		<span class="keyword">return</span> lct.sm[x];</div><div class="line">	&#125;</div><div class="line">&#125; sam;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	freopen(<span class="string">"bzoj2555.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>); </div><div class="line">	freopen(<span class="string">"bzoj2555.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>); </div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;Q); sam.build(),mask=<span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>,tmp;i&lt;=Q;++i) &#123;</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%s"</span>,type); </div><div class="line">		<span class="keyword">if</span> (type[<span class="number">0</span>]==<span class="string">'A'</span>) sam.add(); </div><div class="line">		<span class="keyword">else</span> &#123;	</div><div class="line">			tmp=sam.query();</div><div class="line">			<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,tmp),mask^=tmp; </div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/bzoj1604/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/poj3241/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+
+        
+<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5906fa0032e696c9"></script> 
+
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div id="uyan_frame"></div>
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-01-01 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/字符串题/">字符串题<span>4</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/LCT/">LCT<span>3</span></a></li> <li><a href="/tags/后缀自动机/">后缀自动机<span>4</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#题目"><span class="toc-article-text">题目</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+2555: SubString
+</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#description"><span class="toc-article-text">Description</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#input"><span class="toc-article-text">Input</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+ 
+  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131170"></script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2017 shallwe
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script type="text/javascript" color="0,0,0" opacity='1.0' zIndex="-2" count="200" src="/js/src/particle.js"></script>  
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

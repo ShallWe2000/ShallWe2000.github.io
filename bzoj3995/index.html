@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【bzoj 3995】[SDOI2015]道路修建 | shallwe|code</title>
+  <meta name="author" content="shallwe">
+  
+  <meta name="description" content="OI-blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【bzoj 3995】[SDOI2015]道路修建"/>
+  <meta property="og:site_name" content="shallwe|code"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="shallwe|code" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-97384825-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26e751f78e8841e981f7e01910d5fbf6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">shallwe|code</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>归档页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>分类页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>标签页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friend" title="All the friends.">
+			  <i class="fa fa-link"></i>小伙伴
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>博主是个蒟蒻
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 【bzoj 3995】[SDOI2015]道路修建</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>应该算是比较丝薄无味的一个题目， 按照题目诞生的时间推断， 出题人应该是借鉴了SHOI2008的堵塞的交通，并且难度还降低了。</p>
+<p>简单的来说， 是线段树维护连通性的裸题。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="题目链接"><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=3995" target="_blank" rel="external">题目链接</a></h1>
+<h1 id="题目大意">题目大意</h1>
+<p>维护两行点的区间最小生成树？ 支持修改边权的操作。</p>
+<h1 id="解题报告">解题报告</h1>
+<p>因为只有两行点么， 所以可以把同一列的两个点当做线段树上的一个节点。</p>
+<p>维护四个信息， 对于区间<span class="math inline">\([l,r]\)</span>, 分别表示：</p>
+<ol style="list-style-type: decimal">
+<li><code>as[l,r]</code> : <span class="math inline">\([l,r]\)</span>之间的<span class="math inline">\(2(r-l+1)\)</span>个的的最小生成树；</li>
+<li><code>ls[l,r]</code> : <span class="math inline">\([l,r]\)</span>之间， 第<span class="math inline">\(l\)</span>行的两个点不联通， 形成两个联通块的最小代价；</li>
+<li><code>rs[l,r]</code> : <span class="math inline">\([l,r]\)</span>之间， 第<span class="math inline">\(r\)</span>行的两个点不连通， 形成两个联通块的最小代价；</li>
+<li><code>ts[l,r]</code> : <span class="math inline">\([l,r]\)</span>之间， 第<span class="math inline">\(l\)</span>行的两个点不连通， 第<span class="math inline">\(r\)</span>行的两个点不连通， 形成三个联通块的最小代价。</li>
+</ol>
+<p>通过手动的讨论， 可以得到合并两个区间的转移：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">cmin(x.as,l.as+r.as+a); </div><div class="line">cmin(x.as,l.rs+r.as+a+b); </div><div class="line">cmin(x.as,l.as+r.ls+a+b); </div><div class="line">cmin(x.ls,l.ls+r.as+a); </div><div class="line">cmin(x.ls,l.ls+r.ls+a+b); </div><div class="line">cmin(x.ls,l.ts+r.as+a+b); </div><div class="line">cmin(x.rs,l.as+r.rs+a); </div><div class="line">cmin(x.rs,l.rs+r.rs+a+b); </div><div class="line">cmin(x.rs,l.as+r.ts+a+b); </div><div class="line">cmin(x.ts,l.ls+r.rs+a); </div><div class="line">cmin(x.ts,l.ls+r.ts+a+b); </div><div class="line">cmin(x.ts,l.ts+r.rs+a+b);</div></pre></td></tr></table></figure>
+<p>奇怪的是， 这个题目就这样完结了。。</p>
+<h1 id="代码">代码</h1>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt; </span></span></div><div class="line"> </div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </div><div class="line"> </div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,a,b) for(int i=int(a),nn=int(b);i&lt;=nn;++i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> vep(i,a,b) for(int i=int(a),nn=int(b);i&gt;=nn;--i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> xep(i,b) for(int i=0,nn=int(b);i&lt;nn;++i) </span></div><div class="line"> </div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">60010</span>; </div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf=<span class="number">500000000</span>; </div><div class="line"> </div><div class="line"><span class="keyword">int</span> n,m,lo[N],lw[N],c[N]; </div><div class="line"> </div><div class="line"><span class="keyword">struct</span> four &#123; </div><div class="line">    <span class="keyword">int</span> as, ls, rs, ts; </div><div class="line">    four() &#123;as=ls=ts=ts=inf;&#125;</div><div class="line">    four(<span class="keyword">int</span> as,<span class="keyword">int</span> ls,<span class="keyword">int</span> rs,<span class="keyword">int</span> ts) </div><div class="line">        : as(as),ls(ls),rs(rs),ts(ts)&#123;&#125;</div><div class="line">&#125; s[N&lt;&lt;<span class="number">2</span>]; </div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123; </div><div class="line">    <span class="keyword">char</span> ch=getchar(); <span class="keyword">int</span> f=<span class="number">1</span>; </div><div class="line">    <span class="keyword">for</span> (;ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>;ch=getchar()) <span class="keyword">if</span> (ch==<span class="string">'-'</span>) f=<span class="number">-1</span>; </div><div class="line">    <span class="keyword">for</span> (x=<span class="number">0</span>;ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>;ch=getchar()) x=x*<span class="number">10</span>+ch<span class="number">-48</span>; </div><div class="line">    x*=f; </div><div class="line">&#125; </div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">cmin</span><span class="params">(T &amp;x,T a)</span></span>&#123;x=a&lt;x?a:x;&#125;</div><div class="line"><span class="function">four <span class="title">merge</span><span class="params">(four l, four r,<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span> </span>&#123; </div><div class="line">    <span class="keyword">if</span> (a&gt;b) swap(a,b) ; </div><div class="line">    <span class="function">four <span class="title">x</span><span class="params">(inf,inf,inf,inf)</span></span>; </div><div class="line">    cmin(x.as,l.as+r.as+a); </div><div class="line">    cmin(x.as,l.rs+r.as+a+b); </div><div class="line">    cmin(x.as,l.as+r.ls+a+b); </div><div class="line">    cmin(x.ls,l.ls+r.as+a); </div><div class="line">    cmin(x.ls,l.ls+r.ls+a+b); </div><div class="line">    cmin(x.ls,l.ts+r.as+a+b); </div><div class="line">    cmin(x.rs,l.as+r.rs+a); </div><div class="line">    cmin(x.rs,l.rs+r.rs+a+b); </div><div class="line">    cmin(x.rs,l.as+r.ts+a+b); </div><div class="line">    cmin(x.ts,l.ls+r.rs+a); </div><div class="line">    cmin(x.ts,l.ls+r.ts+a+b); </div><div class="line">    cmin(x.ts,l.ts+r.rs+a+b); </div><div class="line">    <span class="keyword">return</span> x; </div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span> </span>&#123; </div><div class="line">    <span class="keyword">if</span> (l==r) &#123; s[x]=four(c[l],<span class="number">0</span>,<span class="number">0</span>,inf);&#125; </div><div class="line">    <span class="keyword">else</span> &#123; <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>; </div><div class="line">        build(x&lt;&lt;<span class="number">1</span>, l, mid); </div><div class="line">        build(x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r); </div><div class="line">        s[x]=merge(s[x&lt;&lt;<span class="number">1</span>],s[x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>],lo[mid],lw[mid]); </div><div class="line">    &#125; </div><div class="line">&#125; </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> p)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (l==r) &#123; s[x]=four(c[l],<span class="number">0</span>,<span class="number">0</span>,inf);&#125;</div><div class="line">    <span class="keyword">else</span> &#123; <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>; </div><div class="line">         <span class="keyword">if</span> (p&lt;=mid) change(x&lt;&lt;<span class="number">1</span>,l,mid,p); </div><div class="line">         <span class="keyword">else</span> change(x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,p); </div><div class="line">         s[x]=merge(s[x&lt;&lt;<span class="number">1</span>],s[x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>],lo[mid],lw[mid]); </div><div class="line">    &#125;</div><div class="line">&#125; </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> p)</span> </span>&#123; </div><div class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>; <span class="keyword">if</span> (mid==p) &#123; </div><div class="line">        s[x]=merge(s[x&lt;&lt;<span class="number">1</span>],s[x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>],lo[mid],lw[mid]); </div><div class="line">        <span class="keyword">return</span> ; </div><div class="line">    &#125; <span class="keyword">else</span> &#123; </div><div class="line">        <span class="keyword">if</span> (l==r) <span class="keyword">return</span> ;</div><div class="line">        <span class="keyword">if</span> (p&lt;=mid) modify(x&lt;&lt;<span class="number">1</span>,l,mid,p); </div><div class="line">        <span class="keyword">else</span> modify(x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,p); </div><div class="line">        s[x]=merge(s[x&lt;&lt;<span class="number">1</span>],s[x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>],lo[mid],lw[mid]); </div><div class="line">    &#125; </div><div class="line">&#125; </div><div class="line"><span class="function">four <span class="title">query</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> _l,<span class="keyword">int</span> _r)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (_l&lt;=l&amp;&amp;r&lt;=_r) <span class="keyword">return</span> s[x]; </div><div class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>; </div><div class="line">    <span class="keyword">if</span> (_r&lt;=mid) <span class="keyword">return</span> query(x&lt;&lt;<span class="number">1</span>,l,mid,_l,_r); </div><div class="line">    <span class="keyword">if</span> (_l&gt;mid) <span class="keyword">return</span> query(x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,_l,_r); </div><div class="line">    <span class="keyword">return</span> merge(query(x&lt;&lt;<span class="number">1</span>,l,mid,_l,_r),</div><div class="line">        query(x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,_l,_r),lo[mid],lw[mid]); </div><div class="line">&#125; </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123; </div><div class="line">    in(n),in(m); </div><div class="line">    rep(i,<span class="number">1</span>,n<span class="number">-1</span>) in(lo[i]); rep(i,<span class="number">1</span>,n<span class="number">-1</span>) in(lw[i]); </div><div class="line">    rep(i,<span class="number">1</span>,n) in(c[i]); build(<span class="number">1</span>,<span class="number">1</span>,n); </div><div class="line">    <span class="keyword">char</span> tp[<span class="number">10</span>]; <span class="keyword">int</span> l,r,_l,_r,w; four an;  </div><div class="line">    xep(I, m) &#123; <span class="built_in">scanf</span>(<span class="string">"%s"</span>, tp); </div><div class="line">        <span class="keyword">if</span> (tp[<span class="number">0</span>]==<span class="string">'C'</span>) &#123; </div><div class="line">            in(l),in(r),in(_l),in(_r),in(w); </div><div class="line">            <span class="keyword">if</span> (r==_r) c[r]=w, change(<span class="number">1</span>,<span class="number">1</span>,n,r); </div><div class="line">            <span class="keyword">else</span> &#123; <span class="keyword">if</span> (r&gt;_r) swap(r,_r); </div><div class="line">                <span class="keyword">if</span> (l==<span class="number">1</span>) lo[r]=w; <span class="keyword">else</span> lw[r]=w; </div><div class="line">                modify(<span class="number">1</span>,<span class="number">1</span>,n,r);</div><div class="line">            &#125; </div><div class="line">        &#125; <span class="keyword">else</span> &#123; </div><div class="line">            in(l),in(r), an=query(<span class="number">1</span>,<span class="number">1</span>,n,l,r); </div><div class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, an.as); </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/bzoj3742/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/bzoj4011/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+
+        
+<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5906fa0032e696c9"></script> 
+
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div id="uyan_frame"></div>
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-04-30 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/数据结构/">数据结构<span>21</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/线段树/">线段树<span>9</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#题目链接"><span class="toc-article-text">题目链接</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#题目大意"><span class="toc-article-text">题目大意</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#解题报告"><span class="toc-article-text">解题报告</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#代码"><span class="toc-article-text">代码</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+ 
+  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131170"></script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2017 shallwe
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script type="text/javascript" color="0,0,0" opacity='1.0' zIndex="-2" count="200" src="/js/src/particle.js"></script>  
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

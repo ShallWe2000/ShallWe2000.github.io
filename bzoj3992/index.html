@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【bzoj3992】[SDOI2015]序列统计 | shallwe|code</title>
+  <meta name="author" content="shallwe">
+  
+  <meta name="description" content="OI-blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【bzoj3992】[SDOI2015]序列统计"/>
+  <meta property="og:site_name" content="shallwe|code"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="shallwe|code" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-97384825-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26e751f78e8841e981f7e01910d5fbf6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">shallwe|code</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>归档页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>分类页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>标签页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friend" title="All the friends.">
+			  <i class="fa fa-link"></i>小伙伴
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>博主是个蒟蒻
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 【bzoj3992】[SDOI2015]序列统计</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>原根与NTT在SDOI中不常见的露面</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="题目大意">题目大意</h1>
+<p>集合<span class="math inline">\(S\)</span>中选<span class="math inline">\(n\)</span>次数， 乘积在<span class="math inline">\(mod \ M\)</span>意义下为<span class="math inline">\(x\)</span>的方案数.</p>
+<h1 id="解题报告">解题报告</h1>
+<p>想办法把乘积转成和， 因为模的是一个质数， 而 <span class="math inline">\([1,M-1]\)</span> 的每一个数都对应原根<span class="math inline">\(r\)</span>的一个幂, 这样就成功的积化和了.</p>
+<p>问题变为选<span class="math inline">\(n\)</span>次数， 和为一个数的方案数， 这个用倍增+NTT随便搞搞就好了， 注意的一点是要做循环卷积， 因为下标是有模意义的.</p>
+<p>吐槽自己的倍增不如快速幂快？</p>
+<h1 id="代码">代码</h1>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt; </span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORU(i, a, b) for (register int i = int(a), nn = int(b); i &lt;= nn; ++i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORD(i, a, b) for (register int i = int(a), nn = int(b); i &gt;= nn; --i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> REP(i, b) for (register int i = 0, nn = int(b); i &lt; b; ++i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG(x) cout &lt;&lt; (#x) &lt;&lt; <span class="meta-string">" : "</span> &lt;&lt; x &lt;&lt; endl</span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll; </div><div class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> ff; </div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> p = <span class="number">1004535809</span>; </div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1</span> &lt;&lt; <span class="number">14</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> d = <span class="number">3</span>; </div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> rd = <span class="number">334845270</span>; </div><div class="line"></div><div class="line"><span class="keyword">int</span> n, m, _m, _n, X, s, mir[N], re[N];</div><div class="line"><span class="keyword">int</span> a[N], f[N], _w[<span class="number">20</span>], _rw[<span class="number">20</span>], r, rn; </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fast</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line"> 	<span class="keyword">int</span> ans = <span class="number">1</span>; </div><div class="line"> 	<span class="keyword">for</span> (; k; k &gt;&gt;= <span class="number">1</span>, x=<span class="number">1L</span>L*x*x%p)</div><div class="line"> 		<span class="keyword">if</span> (k &amp; <span class="number">1</span>) ans = <span class="number">1L</span>L*ans * x % p; </div><div class="line"> 	<span class="keyword">return</span> ans; </div><div class="line">&#125; </div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123;</div><div class="line">    <span class="keyword">char</span> ch = getchar();</div><div class="line">    <span class="keyword">for</span> (; ch &lt; <span class="string">'0'</span> || ch &gt; <span class="string">'9'</span>; ch = getchar());</div><div class="line">    <span class="keyword">for</span> (x=<span class="number">0</span>; ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>; ch = getchar())</div><div class="line">        x = x * <span class="number">10</span> + ch - <span class="number">48</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">DFT</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> f)</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; _n; ++i) </div><div class="line">		<span class="keyword">if</span> (i &lt; re[i]) swap(a[i], a[re[i]]); </div><div class="line">	</div><div class="line">	<span class="keyword">register</span> <span class="keyword">int</span> wn, w, i, j, x, y, m, t; </div><div class="line">	<span class="keyword">for</span> (m = <span class="number">1</span>, t=<span class="number">0</span>; m &lt; _n; m&lt;&lt;=<span class="number">1</span>, ++t) &#123;</div><div class="line">		wn = (f==<span class="number">1</span>) ? _w[t] : _rw[t]; </div><div class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; _n; i += m&lt;&lt;<span class="number">1</span>) &#123; </div><div class="line">			w = <span class="number">1</span>; </div><div class="line">			<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; m; ++j) &#123; </div><div class="line">				x = a[i+j], y = <span class="number">1L</span>L*a[i+j+m]*w%p; </div><div class="line">				a[i+j] = x+y, a[i+j+m] = x-y; </div><div class="line">				<span class="keyword">if</span> (a[i+j] &gt;= p) a[i+j] -= p; </div><div class="line">				<span class="keyword">if</span> (a[i+j+m] &lt; <span class="number">0</span>) a[i+j+m] += p;</div><div class="line">				w = <span class="number">1L</span>L*w * wn % p; </div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">if</span> (f == <span class="number">-1</span>) <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>; i &lt; _n; ++i) </div><div class="line">		a[i] = <span class="number">1L</span>L * a[i] * rn % p; </div><div class="line">&#125; 		</div><div class="line">		</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">one</span><span class="params">()</span> </span>&#123;</div><div class="line">	DFT(f, <span class="number">1</span>);</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>; i&lt;_n; ++i) </div><div class="line">		f[i] = <span class="number">1L</span>L*f[i] * a[i] % p; </div><div class="line">	DFT(f, <span class="number">-1</span>); </div><div class="line">	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m<span class="number">-1</span>; ++i) &#123;</div><div class="line">		f[i] = f[i] + f[i+m<span class="number">-1</span>], f[i+m<span class="number">-1</span>]=<span class="number">0</span>; </div><div class="line">		<span class="keyword">if</span> (f[i] &gt;= p) f[i] = f[i] - p; </div><div class="line">	&#125;</div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">two</span><span class="params">()</span> </span>&#123;</div><div class="line"> 	DFT(f, <span class="number">1</span>); </div><div class="line"> 	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>; i&lt;_n; ++i) </div><div class="line"> 		f[i] = <span class="number">1L</span>L*f[i] * f[i] % p; </div><div class="line"> 	DFT(f, <span class="number">-1</span>); </div><div class="line"> 	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m<span class="number">-1</span>; ++i) &#123;</div><div class="line">		f[i] = f[i] + f[i+m<span class="number">-1</span>], f[i+m<span class="number">-1</span>]=<span class="number">0</span>; </div><div class="line">		<span class="keyword">if</span> (f[i] &gt;= p) f[i] = f[i] - p; </div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">	</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">judge</span><span class="params">(<span class="keyword">register</span> <span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line"> 	<span class="built_in">memset</span>(mir, <span class="number">-1</span>, <span class="keyword">sizeof</span>(mir)); </div><div class="line"> 	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>, ex=<span class="number">0</span>; ex&lt;m<span class="number">-1</span>; i=i*x%m, ++ex) &#123;</div><div class="line">		<span class="keyword">if</span> (mir[i] != <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">		mir[i] = ex;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">1</span>; </div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	in(n), in(m), in(X), in(s); </div><div class="line">	</div><div class="line">	<span class="keyword">for</span> (r=<span class="number">2</span>; !judge(r); ++r); </div><div class="line"></div><div class="line">	<span class="keyword">register</span> <span class="keyword">int</span> x, t=<span class="number">0</span>;  </div><div class="line">	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=s; ++i) &#123; </div><div class="line">		in(x); <span class="keyword">if</span> (x) ++ a[mir[x]]; </div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	_n = <span class="number">1</span>, _m = (m<span class="number">-1</span>) * <span class="number">2</span>; </div><div class="line">	<span class="keyword">while</span> (_n &lt; _m) _n &lt;&lt;= <span class="number">1</span>, ++t; </div><div class="line">	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>, j=<span class="number">0</span>; i&lt;_n; ++i) &#123; </div><div class="line">		re[i] = j; </div><div class="line">		<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> k=_n&gt;&gt;<span class="number">1</span>;(j^=k)&lt;k;k&gt;&gt;=<span class="number">1</span>); </div><div class="line">	&#125;  </div><div class="line">	</div><div class="line">	rn = fast(_n, p<span class="number">-2</span>), -- t; </div><div class="line">	_w[t] = fast(d, (p<span class="number">-1</span>)/_n), _rw[t]=fast(rd, (p<span class="number">-1</span>)/_n);</div><div class="line">	<span class="keyword">for</span> (; t; --t) </div><div class="line">		_w[t<span class="number">-1</span>]=<span class="number">1L</span>L* _w[t] * _w[t] % p, _rw[t<span class="number">-1</span>]=<span class="number">1L</span>L*_rw[t]*_rw[t]%p; </div><div class="line"></div><div class="line">	f[<span class="number">0</span>] = <span class="number">1</span>, DFT(a, <span class="number">1</span>);</div><div class="line">	</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>&lt;&lt;<span class="number">29</span>,no=<span class="number">0</span>; i; i&gt;&gt;=<span class="number">1</span>) &#123;</div><div class="line">		<span class="keyword">if</span> (no) two();</div><div class="line">		<span class="keyword">if</span> (i &amp; n) one(), no |= <span class="number">1</span>;</div><div class="line">	&#125; </div><div class="line">	</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, f[ mir[X] ]); </div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/bzoj1453/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/uva12633/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+
+        
+<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5906fa0032e696c9"></script> 
+
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div id="uyan_frame"></div>
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-02-14 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/数学题/">数学题<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/倍增/">倍增<span>7</span></a></li> <li><a href="/tags/FFT/">FFT<span>5</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#题目大意"><span class="toc-article-text">题目大意</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#解题报告"><span class="toc-article-text">解题报告</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#代码"><span class="toc-article-text">代码</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+ 
+  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131170"></script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2017 shallwe
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script type="text/javascript" color="0,0,0" opacity='1.0' zIndex="-2" count="200" src="/js/src/particle.js"></script>  
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

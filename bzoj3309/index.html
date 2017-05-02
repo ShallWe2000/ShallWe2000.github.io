@@ -1,0 +1,388 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【bzoj3309】DZY Loves Math | shallwe|code</title>
+  <meta name="author" content="shallwe">
+  
+  <meta name="description" content="OI-blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【bzoj3309】DZY Loves Math"/>
+  <meta property="og:site_name" content="shallwe|code"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="shallwe|code" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-97384825-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26e751f78e8841e981f7e01910d5fbf6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">shallwe|code</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>归档页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>分类页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>标签页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friend" title="All the friends.">
+			  <i class="fa fa-link"></i>小伙伴
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>博主是个蒟蒻
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 【bzoj3309】DZY Loves Math</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>龙队长和yveh屠杀无辜数论题的帮凶…</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="题目大意">题目大意</h1>
+<p>定义 <span class="math inline">\(f(n)\)</span> 为 <span class="math inline">\(n\)</span> 所含质因子的最大幂指数, 给定正整数 <span class="math inline">\(a,b\)</span> ，求 <span class="math inline">\(\displaystyle \sum_{i=1}^{a} \sum_{j=1}^{b} f(gcd(i, j))\)</span> # 解题报告 首先化简式子…设 <span class="math inline">\(a \leqslant b\)</span> , <span class="math display">\[\displaystyle \sum_{i=1}^{a} \sum_{j=1}^{b} f(gcd(i, j)) = \sum_{i=1}^{a}f[i] \sum_{x=1}^{\lfloor \frac{a}{i} \rfloor} \sum_{y=1}^{\lfloor \frac{b}{i} \rfloor}[(x, y)=1]\]</span> <span class="math display">\[= \sum_{i=1}^{a}f[i] \sum_{d=1}^{\lfloor \frac{a}{i} \rfloor} \mu(d) \lfloor \frac{a}{id} \rfloor \lfloor \frac{b}{id} \rfloor\]</span> <span class="math display">\[= \sum_{k=1}^{n} \sum_{d|k} \mu(d) f(\frac{k}{d}) \lfloor \frac{a}{k} \rfloor \lfloor \frac{b}{k} \rfloor\]</span> 上面这个式子, <span class="math inline">\(\lfloor \frac{a}{k} \rfloor \lfloor \frac{b}{k} \rfloor\)</span> 的取值只有 <span class="math inline">\(4 \sqrt{n}\)</span> 个, 所以需要筛出 <span class="math inline">\(\mu \times f\)</span> , 就可以得到 <span class="math inline">\(O(q \sqrt{a})\)</span> 的做法; <br> 首先, 利用 <span class="math inline">\(\mu\)</span> 的性质, <span class="math inline">\(\mu(p^k, k &gt; 1) = 0\)</span> , 所以, 产生贡献的 <span class="math inline">\(\mu(d)f(n/d)\)</span> 中, <span class="math inline">\(d\)</span> 的每个质因子的幂指数为 <span class="math inline">\(0, 1\)</span> ;<br>
+考虑 <span class="math inline">\(f(d)\)</span> 的意义是最大幂指数, 所以将 <span class="math inline">\(n\)</span> 质因数分解得到 <span class="math inline">\(\prod p_i^{k_i}\)</span> , 设最大幂指数为 <span class="math inline">\(k_m\)</span> , 则质因数可以分为幂指数为 <span class="math inline">\(k_m\)</span> 的, 和幂指数小于 <span class="math inline">\(k_m\)</span> 的…<br> 对 <span class="math inline">\(\mu \times f\)</span> 产生贡献的 <span class="math inline">\(k\)</span> , 显然, 是对每个质因数进行不选或者选一个的抉择, 不妨分为在幂指数为 <span class="math inline">\(k_m\)</span> 的质因数中做抉择和在其他质因数中做抉择两部分.<br> 利用二项式定理, <span class="math inline">\(\displaystyle \sum_{i=0}^{n} (-1)^{i}C_n^i = 0\)</span>, 不论在幂指数为 <span class="math inline">\(k_m\)</span> 的质因数中做怎样的抉择, 在其他质因数中作抉择形成的 <span class="math inline">\(\mu\)</span> 会使得贡献为 <span class="math inline">\(0\)</span> , 所以得到重要结论, <span class="math inline">\(u \times f\)</span> 不为 <span class="math inline">\(0\)</span> 的数, 所有质因子的幂指数相同;<br> 所以现在只关心幂指数相同的质因子组成的数, 仍然根据二项式定理, 如果不论怎么选 <span class="math inline">\(d\)</span> , <span class="math inline">\(f(n/d) = k_m\)</span> 的话, <span class="math inline">\((\mu \times f)(n) = 0\)</span> , 但是, 如果 <span class="math inline">\(d\)</span> 选择所有的质因子, <span class="math inline">\(f(n/d) = k_m - 1\)</span> , 根据二项式系数的正负, 如果质因子个数为奇数, <span class="math inline">\((\mu \times f)(n) = 1\)</span> , 否则 <span class="math inline">\((\mu \times f)(n) = -1\)</span> ;<br> 现在可以筛 <span class="math inline">\((\mu \times f)\)</span> 了, yveh 和 龙队分别筛了 <span class="math inline">\(5\)</span> 和 <span class="math inline">\(3\)</span> 个量, 我不是很会他们的做法…我的做法是先只筛 <span class="math inline">\(k_m = 1\)</span> 的数, 然后它的幂的 <span class="math inline">\(f\)</span> 与它相同, 直接赋值.. 复杂度是 <span class="math inline">\(O(n + sq(n))\)</span> , <span class="math inline">\(sq(n)\)</span> 是 <span class="math inline">\([1, n]\)</span> 中的完全 <span class="math inline">\(k\)</span> 次方数;<br> 有了 <span class="math inline">\(\mu \times f\)</span> , 可以暴力分块求答案了.. <img src="/bzoj3309/1.jpg" alt="激烈鼓掌"></p>
+<h1 id="代码">代码</h1>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> fi first</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> se second</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORU(i, a, b) for (int i = a, nn = int(b); i &lt;= nn; ++i)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORD(i, a, b) for (int i = a, nn = int(b); i &gt;= nn; --i)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> REP(i, b) for (int i = 0, nn = int(b); i &lt; nn; ++i)</span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">10000001</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> f[N], n, prime[<span class="number">2000100</span>], test, pn;</div><div class="line"><span class="keyword">bool</span> no_prime[N];</div><div class="line"><span class="keyword">char</span> *cp = (<span class="keyword">char</span> *) <span class="built_in">malloc</span>(<span class="number">1000000</span>);</div><div class="line"><span class="keyword">char</span> *os = (<span class="keyword">char</span> *) <span class="built_in">malloc</span>(<span class="number">1000000</span>), *ot = os;</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> f = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span> (; *cp &lt; <span class="string">'0'</span> || *cp &gt; <span class="string">'9'</span>; cp ++)</div><div class="line">        <span class="keyword">if</span> (*cp == <span class="string">'-'</span>) f = <span class="number">-1</span>;</div><div class="line">    <span class="keyword">for</span> (x = <span class="number">0</span>; *cp &gt;= <span class="string">'0'</span> &amp;&amp; *cp &lt;= <span class="string">'9'</span>; cp ++)</div><div class="line">        x = x * <span class="number">10</span> + *cp - <span class="number">48</span>;</div><div class="line">    x *= f;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">(ll x)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (x) out(x / <span class="number">10</span>), *ot ++ = x % <span class="number">10</span> + <span class="string">'0'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(ll &amp;x)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (x == <span class="number">0</span>) *ot++ = <span class="string">'0'</span>;</div><div class="line">    <span class="keyword">else</span> out(x);</div><div class="line">    *ot ++ = <span class="string">'\n'</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">euler</span><span class="params">()</span> </span>&#123;</div><div class="line">    f[<span class="number">1</span>] = <span class="number">0</span>, no_prime[<span class="number">1</span>] = <span class="number">1</span>;</div><div class="line">    FORU(i, <span class="number">2</span>, N - <span class="number">1</span>) &#123;</div><div class="line">        <span class="keyword">if</span> (!no_prime[i]) &#123;</div><div class="line">            prime[++pn] = i;</div><div class="line">            f[i] = <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; prime[j] * i &lt; N &amp;&amp; j &lt;= pn; ++j) &#123;</div><div class="line">            no_prime[i * prime[j]] = <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span> (i % prime[j]) &#123;</div><div class="line">                f[i * prime[j]] = -f[i];</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    FORU(i, <span class="number">1</span>, <span class="number">3162</span>)</div><div class="line">        <span class="keyword">if</span> (f[i]) <span class="keyword">for</span> (ll j = <span class="number">1L</span>L * i * i; j &lt; N; j *= i)</div><div class="line">            f[j] = f[i];</div><div class="line">    FORU(i, <span class="number">2</span>, N - <span class="number">1</span>)</div><div class="line">        f[i] += f[i - <span class="number">1</span>];</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (a &gt; b) swap(a, b);</div><div class="line">    ll ans = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, j; i &lt;= a; i = j + <span class="number">1</span>) &#123;</div><div class="line">        j = min(a/(a/i), b/(b/i));</div><div class="line">        ans += <span class="number">1L</span>L * (f[j] - f[i<span class="number">-1</span>]) * (a/i) * (b/i);</div><div class="line">    &#125;</div><div class="line">    print(ans);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    fread(cp, <span class="number">1</span>, <span class="number">1000000</span>, <span class="built_in">stdin</span>);</div><div class="line">    euler();</div><div class="line">    in(test);  <span class="keyword">int</span> a, b;</div><div class="line">    <span class="keyword">while</span> (test --) &#123;</div><div class="line">        in(a), in(b);</div><div class="line">        query(a, b) ;</div><div class="line">    &#125;</div><div class="line">    fwrite(os, <span class="number">1</span>, ot - os, <span class="built_in">stdout</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="原题信息">原题信息</h1>
+<p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=3309" target="_blank" rel="external">题目链接</a></p>
+<body>
+<title>
+Problem 3309. – DZY Loves Math
+</title>
+<center>
+<h2>
+3309: DZY Loves Math
+</h2>
+<span class="green">Time Limit: </span>20 Sec  <span class="green">Memory Limit: </span>512 MB<br><span class="green">Submit: </span>782  <span class="green">Solved: </span>418<br>[<a href="submitpage.php?id=3309">Submit</a>][<a href="problemstatus.php?id=3309">Status</a>][<a href="bbs.php?id=3309">Discuss</a>]
+</center>
+<h2>
+Description
+</h2>
+<div class="content">
+<p>
+<span style="font-size: medium">对于正整数n，定义f(n)为n所含质因子的最大幂指数。例如f(1960)=f(2^3 * 5^1 * 7^2)=3, f(10007)=1, f(1)=0。<br> 给定正整数a,b，求sigma(sigma(f(gcd(i,j)))) (i=1..a, j=1..b)。</span>
+</p>
+<p>
+</p>
+</div>
+<h2>
+Input
+</h2>
+<div class="content">
+<p>
+<span style="font-size: medium">第一行一个数T，表示询问数。<br> 接下来T行，每行两个数a,b，表示一个询问。</span>
+</p>
+<p>
+</p>
+</div>
+<h2>
+Output
+</h2>
+<div class="content">
+<p>
+<span style="font-size: medium">对于每一个询问，输出一行一个非负整数作为回答。</span>
+</p>
+<p>
+</p>
+</div>
+<h2>
+Sample Input
+</h2>
+<pre><code>        &lt;div class=&quot;content&quot;&gt;&lt;span class=&quot;sampledata&quot;&gt;4&lt;br&gt;</code></pre>
+10000<br> 7558588 9653114<br> 6514903 4451211<br> 7425644 1189442<br> 6335198 4957<br> 
+
+<h2>
+Sample Output
+</h2>
+<pre><code>        &lt;div class=&quot;content&quot;&gt;&lt;span class=&quot;sampledata&quot;&gt;35793453939901&lt;br&gt;</code></pre>
+14225956593420<br> 4332838845846<br> 15400094813
+
+<h2>
+HINT
+</h2>
+<pre><code>        &lt;div class=&quot;content&quot;&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;【数据规模】&lt;br&gt;&lt;br&gt;</code></pre>
+T&lt;=10000<br><br> 1&lt;=a,b&lt;=10^7
+<p></p>
+<br>
+<p>
+</p>
+<p>
+</p>
+
+<h2>
+Source
+</h2>
+</body>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/bzoj2599/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/bzoj1453/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+
+        
+<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5906fa0032e696c9"></script> 
+
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div id="uyan_frame"></div>
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-02-14 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/数学题/">数学题<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/筛法/">筛法<span>2</span></a></li> <li><a href="/tags/反演/">反演<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#题目大意"><span class="toc-article-text">题目大意</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#代码"><span class="toc-article-text">代码</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#原题信息"><span class="toc-article-text">原题信息</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+3309: DZY Loves Math
+</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+Description
+</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+Input
+</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+Output
+</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+Sample Input
+</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+Sample Output
+</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+HINT
+</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+Source
+</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+ 
+  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131170"></script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2017 shallwe
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script type="text/javascript" color="0,0,0" opacity='1.0' zIndex="-2" count="200" src="/js/src/particle.js"></script>  
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

@@ -6744,13 +6744,11 @@ h4 {
   color: #a94442;
 }
 .content {
-/*  background-color: #ffffff;*/
-background:rgba(255, 255, 255, 0) none repeat scroll 0 0 !important;
-background-color:#000000;
-filter:Alpha(opacity=50);
-position:static; 
-*zoom:1;
-  color: #333333;
+  background-color: #ffffff;
+  opacity: 0.75;
+/*  background: rgba(100, 100, 100, 1.0);*/
+  position: static; 
+  *zoom:1;
   margin-top: 20px;
 }
 a {

@@ -1,0 +1,374 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【bzoj 2599】[IOI2011]Race | shallwe|code</title>
+  <meta name="author" content="shallwe">
+  
+  <meta name="description" content="OI-blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【bzoj 2599】[IOI2011]Race"/>
+  <meta property="og:site_name" content="shallwe|code"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="shallwe|code" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-97384825-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26e751f78e8841e981f7e01910d5fbf6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">shallwe|code</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>归档页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>分类页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>标签页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friend" title="All the friends.">
+			  <i class="fa fa-link"></i>小伙伴
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>博主是个蒟蒻
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 【bzoj 2599】[IOI2011]Race</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>聪哥和TA爷在做的一道题, 之前好像所有人都当做点分治模板题做的, TA爷用dsu on a tree艹了, 我也更欣赏这个常数优越的做法;</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="题目大意">题目大意</h1>
+<p>给一棵树,每条边有权.求一条简单路径,权值和等于<span class="math inline">\(K\)</span>,且边的数量最小.<span class="math inline">\(N &lt;= 200000\)</span>, <span class="math inline">\(K &lt;= 1000000\)</span></p>
+<h1 id="解题报告">解题报告</h1>
+<p>求满足条件的树的路径, 首先想到的是点分治, 在每个分治块, 从分治重心出发, 可以得到每个点到重心的距离, 并更新答案;</p>
+<p>在点分治的过程中可以剪枝, 有两点:①已经经过的距离大于<span class="math inline">\(k\)</span>, 停止<code>dfs</code>, ②已经经过的边数大于<code>ans</code>, 停止<code>dfs</code>;</p>
+<p>因为点分治本身不优越的常数, 所以这个做法比较慢(加了剪枝后还比较理想);</p>
+<p>给出几个同学使用点分治的解题报告, <a href="http://www.cnblogs.com/DaD3zZ-Beyonder/p/5618633.html" target="_blank" rel="external">dada’s</a> <a href="http://www.cnblogs.com/abclzr/p/5337088.html" target="_blank" rel="external">abclzr’s</a></p>
+<p>再次扔出<a href="http://blog.csdn.net/qaq__qaq/article/details/53455462" target="_blank" rel="external">yveh的dsu on the tree</a>, 是这个题常数比较小的一个做法;</p>
+<p>极其模板, 路径的长度可以表示为<span class="math inline">\(dis[x] + dis[y] - dis[lca] * 2\)</span>, 所以可以利用记录 <span class="math inline">\(dis\)</span> 来在 <span class="math inline">\(lca\)</span> 处得更新 <code>ans</code>;</p>
+<p>每次先将轻儿子子树中的事情处理好, 清空数组, 然后, 处理重儿子的信息, 不清空数组, 将当前点和轻儿子子树的点重新加入数组得到答案;</p>
+<p>但是 <span class="math inline">\(dis[x]\)</span> 可以很大, 数组并不能很好存下, 那么我们可以利用模意义, 在 <span class="math inline">\(mod \ k\)</span> 的意义下记录信息, 同时记录原数大小, 更新答案的时候, 需要判断原数是否满足题意;</p>
+<h1 id="代码">代码</h1>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt; </span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> fi first</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> se second</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORU(i, a, b) for (int i = a, nn = int(b); i &lt;= nn; ++i)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORD(i, a, b) for (int i = a, nn = int(b); i &gt;= nn; --i)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> REP(i, b) for (int i = 0, nn = int(b); i &lt; nn; ++i)</span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">200100</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = N;</div><div class="line"></div><div class="line">ll dis[N];</div><div class="line"><span class="keyword">int</span> n, k, dep[N], sz[N], son[N], ans = inf;</div><div class="line"><span class="keyword">int</span> sho[<span class="number">1000000</span>], id[N], cnt, ent[N], out[N];</div><div class="line">vi sta, to[N], v[N];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123;</div><div class="line">    <span class="keyword">char</span> ch = getchar(); <span class="keyword">int</span> f = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span> (; ch &lt; <span class="string">'0'</span> || ch &gt; <span class="string">'9'</span>; ch = getchar())</div><div class="line">        <span class="keyword">if</span> (ch == <span class="string">'-'</span>) f = <span class="number">-1</span>;</div><div class="line">    <span class="keyword">for</span> (x = <span class="number">0</span>; ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>; ch = getchar())</div><div class="line">        x = x * <span class="number">10</span> + ch - <span class="number">48</span>;</div><div class="line">    x = x * f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> from)</span> </span>&#123;</div><div class="line">    sz[x] = <span class="number">1</span>, son[x] = n, id[++cnt] = x;</div><div class="line">    ent[x] = cnt;</div><div class="line">    REP(i, sz(to[x]))</div><div class="line">        <span class="keyword">if</span> (to[x][i] != from) &#123;</div><div class="line">            dis[to[x][i]] = dis[x] + v[x][i];</div><div class="line">            dep[to[x][i]] = dep[x] + <span class="number">1</span>;</div><div class="line">            dfs(to[x][i], x);</div><div class="line">            sz[x] += sz[to[x][i]];</div><div class="line">            <span class="keyword">if</span> (sz[to[x][i]] &gt; sz[son[x]])</div><div class="line">                son[x] = to[x][i];</div><div class="line">        &#125;</div><div class="line">    out[x] = cnt;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">getans</span><span class="params">(ll &amp;di, <span class="keyword">int</span> &amp;de, ll &amp;_di, <span class="keyword">int</span> &amp;_de)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> __di = (_di * <span class="number">2</span> % k - di % k) + k;</div><div class="line">    <span class="keyword">if</span> (__di &gt;= k)  __di -= k;</div><div class="line">    <span class="keyword">if</span> (sho[ __di ] != <span class="number">-1</span> &amp;&amp; dis[sho[__di]] + di -_di * <span class="number">2</span> == k)</div><div class="line">        ans = min(ans, de + dep[sho[__di]] - _de * <span class="number">2</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">enter</span><span class="params">(<span class="keyword">int</span> &amp; x)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> _di = dis[x] % k;</div><div class="line">    <span class="keyword">if</span> (sho[_di] == <span class="number">-1</span>) sho[_di] = x;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (dis[x] &lt; dis[sho[_di]]) sho[_di] = x;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (dis[x] == dis[sho[_di]] &amp;&amp; dep[x] &lt; dep[sho[_di]])</div><div class="line">            sho[_di] = x;</div><div class="line">    sta.pb(_di);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">smart</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f, <span class="keyword">bool</span> top)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (son[x] !=  n) &#123;</div><div class="line">        REP(i, sz(to[x])) <span class="keyword">if</span> (to[x][i] ^ f)</div><div class="line">            <span class="keyword">if</span> (to[x][i] ^ son[x])</div><div class="line">                smart(to[x][i], x, <span class="number">1</span>);</div><div class="line">        smart(son[x], x, <span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    getans(dis[x], dep[x], dis[x], dep[x]);</div><div class="line">    enter(x);</div><div class="line">    REP(i, sz(to[x])) <span class="keyword">if</span> (to[x][i] ^ f)</div><div class="line">        <span class="keyword">if</span> (to[x][i] ^ son[x]) &#123;</div><div class="line">            <span class="keyword">int</span> y = to[x][i];</div><div class="line">            FORU(i, ent[y], out[y])</div><div class="line">                getans(dis[id[i]], dep[id[i]], dis[x], dep[x]);</div><div class="line">            FORU(i, ent[y], out[y])</div><div class="line">                enter(id[i]);</div><div class="line">        &#125;</div><div class="line">    <span class="keyword">if</span> (top) &#123;</div><div class="line">        REP(i, sz(sta)) sho[sta[i]] = <span class="number">-1</span>;</div><div class="line">        sta.clear();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    in(n), in(k);</div><div class="line">    <span class="keyword">int</span> x, y, z;</div><div class="line">    REP(i, n - <span class="number">1</span>) &#123;</div><div class="line">        in(x), in(y), in(z);</div><div class="line">        to[x].pb(y), to[y].pb(x);</div><div class="line">        v[x].pb(z), v[y].pb(z);</div><div class="line">    &#125;</div><div class="line">    dep[<span class="number">0</span>] = <span class="number">1</span>, dfs(<span class="number">0</span>, <span class="number">-1</span>);</div><div class="line">    mmst(sho, <span class="number">-1</span>);</div><div class="line">    smart(<span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans == N ? <span class="number">-1</span> : ans);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><span class="math inline">\(MLE\)</span> 了两发, 发现自己的数组范围开大了10倍, 太惨了;</p>
+<h1 id="原题信息">原题信息</h1>
+<p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=2599" target="_blank" rel="external">题目链接</a></p>
+<body>
+<title>
+Problem 2599. – [IOI2011]Race
+</title>
+<center>
+<h2>
+2599: [IOI2011]Race
+</h2>
+<span class="green">Time Limit: </span>70 Sec  <span class="green">Memory Limit: </span>128 MB<br><span class="green">Submit: </span>3006  <span class="green">Solved: </span>877<br>[<a href="submitpage.php?id=2599">Submit</a>][<a href="problemstatus.php?id=2599">Status</a>][<a href="bbs.php?id=2599">Discuss</a>]
+</center>
+<h2>
+Description
+</h2>
+<div class="content">
+<p>
+给一棵树,每条边有权.求一条简单路径,权值和等于K,且边的数量最小.N &lt;= 200000, K &lt;= 1000000
+</p>
+<p>
+</p>
+</div>
+<h2>
+Input
+</h2>
+<div class="content">
+<p>
+第一行 两个整数 n, k<br> 第二..n行 每行三个整数 表示一条无向边的两端和权值 (注意点的编号从0开始)
+</p>
+</div>
+<h2>
+Output
+</h2>
+<div class="content">
+<p>
+一个整数 表示最小边数量 如果不存在这样的路径 输出-1
+</p>
+</div>
+<h2>
+Sample Input
+</h2>
+<pre><code>        &lt;div class=&quot;content&quot;&gt;&lt;span class=&quot;sampledata&quot;&gt;4 3&lt;br&gt;</code></pre>
+0 1 1<br> 1 2 2<br> 1 3 4<br> 
+
+<h2>
+Sample Output
+</h2>
+<pre><code>        &lt;div class=&quot;content&quot;&gt;&lt;span class=&quot;sampledata&quot;&gt;2&lt;br&gt;</code></pre>
+
+
+</body>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/bzoj1500/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/bzoj3309/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+
+        
+<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5906fa0032e696c9"></script> 
+
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div id="uyan_frame"></div>
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-02-14 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/数据结构/">数据结构<span>21</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/树链剖分/">树链剖分<span>6</span></a></li> <li><a href="/tags/树分治/">树分治<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#题目大意"><span class="toc-article-text">题目大意</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#解题报告"><span class="toc-article-text">解题报告</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#代码"><span class="toc-article-text">代码</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#原题信息"><span class="toc-article-text">原题信息</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+2599: [IOI2011]Race
+</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+Description
+</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+Input
+</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+Output
+</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+Sample Input
+</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#undefined"><span class="toc-article-text">
+Sample Output
+</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+ 
+  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131170"></script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2017 shallwe
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script type="text/javascript" color="0,0,0" opacity='1.0' zIndex="-2" count="200" src="/js/src/particle.js"></script>  
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

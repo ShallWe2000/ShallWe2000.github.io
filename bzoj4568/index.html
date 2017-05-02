@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【bzoj 4568】[Scoi2016]幸运数字 | shallwe|code</title>
+  <meta name="author" content="shallwe">
+  
+  <meta name="description" content="OI-blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【bzoj 4568】[Scoi2016]幸运数字"/>
+  <meta property="og:site_name" content="shallwe|code"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="shallwe|code" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-97384825-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?26e751f78e8841e981f7e01910d5fbf6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">shallwe|code</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>归档页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>分类页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>标签页
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friend" title="All the friends.">
+			  <i class="fa fa-link"></i>小伙伴
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>博主是个蒟蒻
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 【bzoj 4568】[Scoi2016]幸运数字</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>SCOI2016Day1 第二道</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="题目链接"><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=4568" target="_blank" rel="external">题目链接</a></h1>
+<h1 id="题目大意">题目大意</h1>
+<p>每个点上有一个权值，多次查询一条路径每个点任意选</p>
+<h1 id="解题报告">解题报告</h1>
+<p>首先，每个点任意选或不选的最大异或和是线性基的裸题，所以考虑将一条路径的线性基合并；</p>
+<p>这个显然可以使用动态点分治完成， 记录每个点到点分树上的每个祖先的路径线性基(空间复杂度<span class="math inline">\(O(n\log{n}\log{X})\)</span>), 预处理的时间是<span class="math inline">\(O(n\log{n}\log{X})\)</span>, 查询的时候通过<span class="math inline">\(O(\log{n})\)</span>确定路径在点分树上的<code>lca</code>, 然后在<code>lca</code>(也就是一个重心处）将两个线性基合并， 复杂度是<span class="math inline">\(O(q\times(\log{n}+\log^2{p}))\)</span> .</p>
+<p>然而我却使用了一个复杂度非常烂的算法（写的时候以为是一样的。。。） ， 倍增+线性基合并。</p>
+<p>首先预处理的时候需要做<span class="math inline">\(O(n\log{n}\log^2{X})\)</span>, 因为线性基的合并是<span class="math inline">\(O(\log^2{P})\)</span>的。</p>
+<p>查询的时候我更加愚蠢的跳了<span class="math inline">\(\log{n}\)</span>次， 每次都合并了线性基。。所以复杂度是<span class="math inline">\(O(q\times\log{n}\log^2{X})\)</span> .</p>
+<p>然后竟然还过了。。艹？</p>
+<h1 id="代码">代码</h1>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt; </span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,a,b) for(int i=int(a),nn=int(b);i&lt;=nn;++i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> vep(i,a,b) for(int i=int(a),nn=int(b);i&gt;=nn;--i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> xep(i,b) for(int i=0,nn=int(b);i&lt;nn;++i) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> W(x,w) (((x)&gt;&gt;w)&amp;1)</span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll; </div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">20010</span>; </div><div class="line"></div><div class="line"><span class="keyword">struct</span> base &#123; </div><div class="line">	<span class="keyword">int</span> c; ll a[<span class="number">65</span>]; base() &#123;<span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a)),c=<span class="number">0</span>;&#125;; </div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ins</span><span class="params">(ll x)</span> </span>&#123; </div><div class="line">		vep(i,<span class="number">60</span>,<span class="number">0</span>) <span class="keyword">if</span> (W(x,i)) &#123; </div><div class="line">			<span class="keyword">if</span> (!a[i]) &#123; ++c,a[i]=x; <span class="keyword">break</span>;&#125; </div><div class="line">			<span class="keyword">else</span> &#123; x^=a[i]; <span class="keyword">if</span> (!x) <span class="keyword">break</span>;&#125; </div><div class="line">		&#125; </div><div class="line">	&#125; </div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123; </div><div class="line">		<span class="built_in">cout</span>&lt;&lt;c&lt;&lt;<span class="string">":"</span>&lt;&lt;<span class="built_in">endl</span>; </div><div class="line">		vep(i,<span class="number">60</span>,<span class="number">0</span>) <span class="keyword">if</span> (a[i]) <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">":"</span>&lt;&lt;a[i]&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>; </div><div class="line">	&#125; </div><div class="line">&#125; b[N][<span class="number">16</span>]; </div><div class="line"><span class="keyword">struct</span> edge &#123; </div><div class="line">	<span class="keyword">int</span> nxt,to; edge(<span class="keyword">int</span> nxt=<span class="number">0</span>,<span class="keyword">int</span> to=<span class="number">0</span>) </div><div class="line">		:nxt(nxt),to(to) &#123;&#125;</div><div class="line">&#125; e[N&lt;&lt;<span class="number">1</span>]; </div><div class="line"><span class="keyword">int</span> n,q,hed[N],f[N][<span class="number">16</span>],tot,de[N]; ll g[N];</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">(T &amp;x)</span> </span>&#123;</div><div class="line">	<span class="keyword">char</span> ch=getchar(); <span class="keyword">int</span> f=<span class="number">1</span>; </div><div class="line">	<span class="keyword">for</span> (;ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>;ch=getchar()) <span class="keyword">if</span>(ch==<span class="string">'-'</span>) f=<span class="number">-1</span>; </div><div class="line">	<span class="keyword">for</span> (x=<span class="number">0</span>;ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>;ch=getchar()) x=x*<span class="number">10</span>+ch<span class="number">-48</span>; </div><div class="line">	x*=f; </div><div class="line">&#125; </div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span> </span>&#123; </div><div class="line">	e[++tot]=edge(hed[x],y),hed[x]=tot; </div><div class="line">&#125; </div><div class="line"><span class="function">base <span class="title">merge</span><span class="params">(base x, base y)</span> </span>&#123; </div><div class="line">	<span class="keyword">if</span> (x.c&gt;y.c) swap(x,y); </div><div class="line">	xep(i, <span class="number">61</span>) <span class="keyword">if</span> (x.a[i]) y.ins(x.a[i]); </div><div class="line">	<span class="keyword">return</span> y; </div><div class="line">&#125; </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; </div><div class="line">	b[x][<span class="number">0</span>].ins(g[x]); de[x]=de[f[x][<span class="number">0</span>]]+<span class="number">1</span>; </div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;f[x][i];++i) &#123; </div><div class="line">		f[x][i+<span class="number">1</span>]=f[f[x][i]][i]; </div><div class="line">		b[x][i+<span class="number">1</span>]=merge(b[x][i],b[f[x][i]][i]); </div><div class="line">	&#125; </div><div class="line">	<span class="keyword">int</span> y; </div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=hed[x];i;i=e[i].nxt) </div><div class="line">		<span class="keyword">if</span> (y=e[i].to, y!=f[x][<span class="number">0</span>])  </div><div class="line">			f[y][<span class="number">0</span>]=x,build(y); </div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span> </span>&#123; </div><div class="line">	<span class="keyword">if</span> (de[x]&lt;de[y]) swap(x,y); </div><div class="line">	base as; <span class="keyword">int</span> dta=de[x]-de[y];</div><div class="line">	vep(i,<span class="number">14</span>,<span class="number">0</span>) <span class="keyword">if</span> (W(dta,i)) </div><div class="line">		as=merge(as, b[x][i]), x=f[x][i]; </div><div class="line">	<span class="keyword">if</span> (x!=y) &#123; </div><div class="line">		vep(i,<span class="number">14</span>,<span class="number">0</span>) <span class="keyword">if</span> (f[x][i]!=f[y][i]) &#123;  </div><div class="line">			as=merge(as, b[x][i]), as=merge(as, b[y][i]); </div><div class="line">			x=f[x][i], y=f[y][i]; </div><div class="line">		&#125;</div><div class="line">		as=merge(as,b[x][<span class="number">0</span>]), as=merge(as,b[y][<span class="number">0</span>]); </div><div class="line">		x=f[x][<span class="number">0</span>], y=f[y][<span class="number">0</span>];</div><div class="line">	&#125;</div><div class="line">	as=merge(as,b[x][<span class="number">0</span>]); </div><div class="line">	ll ans=<span class="number">0</span>; </div><div class="line">	vep(i,<span class="number">60</span>,<span class="number">0</span>) <span class="keyword">if</span> ((ans^as.a[i])&gt;ans) </div><div class="line">		ans=ans^as.a[i]; </div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans); </div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123; </div><div class="line">	in(n), in(q); rep(i,<span class="number">1</span>,n) in(g[i]); <span class="keyword">int</span> x,y;  </div><div class="line">	xep(i,n<span class="number">-1</span>) in(x),in(y),add(x,y),add(y,x); </div><div class="line">	build(<span class="number">1</span>); </div><div class="line">	xep(i,q) &#123; in(x),in(y); query(x,y);&#125; </div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/bzoj4567/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/bzoj4569/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+
+        
+<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5906fa0032e696c9"></script> 
+
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  	 <div id="uyan_frame"></div>
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-03-18 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/数据结构/">数据结构<span>21</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/倍增/">倍增<span>7</span></a></li> <li><a href="/tags/动态点分治/">动态点分治<span>2</span></a></li> <li><a href="/tags/线性基/">线性基<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#题目链接"><span class="toc-article-text">题目链接</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#题目大意"><span class="toc-article-text">题目大意</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#解题报告"><span class="toc-article-text">解题报告</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#代码"><span class="toc-article-text">代码</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+ 
+  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131170"></script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2017 shallwe
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script type="text/javascript" color="0,0,0" opacity='1.0' zIndex="-2" count="200" src="/js/src/particle.js"></script>  
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
