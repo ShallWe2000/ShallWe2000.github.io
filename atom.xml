@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://shallwe.ga/"/>
-  <updated>2017-05-25T03:05:13.204Z</updated>
+  <updated>2017-05-25T12:46:21.098Z</updated>
   <id>http://shallwe.ga/</id>
   
   <author>
@@ -16,90 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>【SDOI 2017】Round2离队滚粗记</title>
-    <link href="http://shallwe.ga/sdoi2017r2/"/>
-    <id>http://shallwe.ga/sdoi2017r2/</id>
-    <published>2017-05-28T16:00:00.000Z</published>
-    <updated>2017-05-25T03:05:13.204Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>两天省选真是让我体会到了人生无常(呵呵呵~~)。</p>
-<p>有的时候说什么“谋事在人，成事在天”， 也是很有道理的， 有些事情真的是把握不住的。</p>
-<p>该死的二轮省选对我的小心脏造成了1ww点的打击哈。。</p>
-</blockquote>
-<a id="more"></a>
-<h3 id="day--1">Day -1</h3>
-<p>从帝都昏昏碌碌地滚回了DY。</p>
-<p>作为一个CTSC、APIO炸成狗的选手，在SLYZ的某体育组(?)接受了一波帝国主义的面试培训。</p>
-<del>
-(为我进不了面试做了一波铺垫?)
-</del>
-<p>培训上就是各种婊XYM大爷？ 挺XYM大爷怒婊高考真是带劲！</p>
-<blockquote>
-<p>我感觉你们现在的这些初高中老师不行的， 看我来做个榜样让你们学习一下什么叫做素质教育！ ——XYM</p>
-</blockquote>
-<p>真是带劲， 估计只有这样霸气侧漏的选手才可以进入省队吧。</p>
-<p>回家发现妈妈狼吞虎咽了给我买的晚饭（pizza！）， 据说是自己减肥没吃晚饭结果忍不住了？？？</p>
-<h3 id="day-0">Day 0</h3>
-<p>12:00在学校食堂门口出发的， 再次成为一群文化课大佬围观的动物园集装箱。</p>
-<p>路上打了波WY， 反正就是各种掉分， 各种掉段， 各种掉线。。。</p>
-<p>到了济南时间还很早，（好像是走高速的功劳）， 拉着马胖去吃了一波米线（？！） 没错就是在四大火炉-济南，吃了一碗巨烫巨烫的鸡汤米线， 流汗.jpg。</p>
-<p>然后李老师又灌了一波鸡汤， 大体是“你们都有光明的未来”之类的。</p>
-<p>强行洗波澡疯狂复习唐老师数学题和什么3D计算几何大模板？</p>
-<p>听说你是出题人， 你放屁我都信！</p>
-<h3 id="day-1">Day 1</h3>
-<p>上午8:00准时开考， 题目读了一遍， 没什么会做的， 就先写了三个暴力(5+30+10?)。</p>
-<p>发现第三题链的情况似乎比较easy。。 必然是什么分块|线段树云云的， 先放下一会写。</p>
-<p>咦， 第一题这个部分分是不是留给我这个大常数垃圾精度FFT选手的啊？ 一会写一波！</p>
-<p>咦这个第二题我怎么没什么想法啊， 应该也有可得的部分分吧， 我想想啊！（时间一分一秒地过去， 大概想了2:00？）, 艹， 我怎么走神了， 看来这个题应该弃疗啊！</p>
-<p>还有一个小时了啊， 才45分怎么办。 看第三题好像链上部分常数超小？复杂度算出来<span class="math inline">\(10^9\)</span>但全是异或操作可以跑跑看？ 如果能跑过那线段树就只多10分啦， 那我才不想写呢。。（我也不知道哪里出现这么傲娇的想法啊！）</p>
-<p>那我就码个T1部分分！ 一波倍增+FFT20分钟写完调完还有15分钟， 测速测精度T1 貌似有60了， 但是T3 貌似常数没那么优越？ 完蛋20分部分分没了。</p>
-<p>最后60+30+10=100？ day1rk 9-12? 总排名<span class="math inline">\(10 \rightarrow 9\)</span>, 好吧还是卡着线。</p>
-<p>ISA day1rk2 瞬间翻到rk4 ？不愧是双金选手就是吊啊！</p>
-<p>下午睡睡 + 2K一波波 + 继续复习数学题+3D计算几何 ？</p>
-<p>还看了一波BIG BANG。 难道这就是死亡FLAG ？？</p>
-<h3 id="day-2">Day 2</h3>
-<p>咦这个T1我会25啊， 我spfa强行一波！咦， 应该用入边记录状态呀， 如果<span class="math inline">\(k\)</span>很小那好多入边的状态不就一样了？ 那我用点和字符串的标号hash一波状态? 能快一点？（简直在扯淡！！）。</p>
-<p>咦这个T2好坑啊， 这个方案明明是唯一的样子为什么要字典序最小啊， 我不会证啊， 写个对拍看看？ 好像没反例？ <span class="math inline">\(n^2\)</span>一波！（得到自己唯一的50分）。这怎么还有20分是五边形数啊， 前两天刚写的我怎么想不起来了呢。。完了蛋了。。</p>
-<p>这个T3是不是奇怪的后缀家族题啊？ 我YY一波（1.5h passed), 不会啊， hash来个暴力吧， 自然溢出会不会被卡啊？ 好害怕啊， 我再加个mod来个双hash ? (有病！！)</p>
-<p>好像25+50+30 ? 应该比较稳？</p>
-<p>吃饭的时候莫名其妙的心情不好。。</p>
-<p>看榜0+50+0 = 50 ? rk 25?</p>
-<p>听说你本来就卡spfa 我又用hash加了一个常数？</p>
-<p>听说你标算是自然溢出的单hash所以只要取模全部T ?</p>
-<p>听说。。。 总rk 跌到15 没进面试？</p>
-<p>大体上就是无比的生气， 真是气死气死了。</p>
-<p>我的rk曲线是11 -&gt; 10 -&gt; 9 -&gt; 15 .　最后这场day2可以说毁了我的OI生涯。</p>
-<p>算了一下自己是学了9年OI, 虽然7年都是文化课选手， 但是日久情深， 你用暴力还卡常的做法恶心我， 我真是很难过。真的是难过极了， 难过到自己已经接近退役都没察觉了。。</p>
-<p>申请了一波cd, 老师说基本没问题， 但感觉d类歧视也挺难受的， c类又巨贵好气。</p>
-<p>好好出题卡什么常数啊， 我就老老实实地打个暴力你卡什么啊。</p>
-<p>生气， 难受！</p>
-<p>9年OI一场空， D2卡常见祖宗！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;两天省选真是让我体会到了人生无常(呵呵呵~~)。&lt;/p&gt;
-&lt;p&gt;有的时候说什么“谋事在人，成事在天”， 也是很有道理的， 有些事情真的是把握不住的。&lt;/p&gt;
-&lt;p&gt;该死的二轮省选对我的小心脏造成了1ww点的打击哈。。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="奇怪向" scheme="http://shallwe.ga/categories/%E5%A5%87%E6%80%AA%E5%90%91/"/>
-    
-    
-      <category term="奇怪向" scheme="http://shallwe.ga/tags/%E5%A5%87%E6%80%AA%E5%90%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【pkusc 2017】签下卖身契</title>
+    <title>【PKUSC 2017】签下卖身契</title>
     <link href="http://shallwe.ga/pkusc2017/"/>
     <id>http://shallwe.ga/pkusc2017/</id>
-    <published>2017-05-28T16:00:00.000Z</published>
-    <updated>2017-05-25T00:30:35.339Z</updated>
+    <published>2017-05-28T16:00:01.000Z</published>
+    <updated>2017-05-25T12:46:21.098Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>SDOI 2017 R2 滚出队的我， THU已经是不给机会了。</p>
@@ -213,7 +134,7 @@
 <p>S: 我优点超多， （准备开吹）</p>
 <p>B: （突然打断）看来没什么张口而出的优点， 那有什么缺点？</p>
 <p>S:（exm?)…</p>
-<p>被凶了一年看来没学上了。。</p>
+<p>被凶了一脸看来没学上了。。</p>
 <hr>
 <p>面试官C:</p>
 <p>C: 简单介绍一下自己。</p>
@@ -246,6 +167,85 @@
 &lt;p&gt;但是PKU还是挺有人情味的，没让我这个9年OI直接退役。&lt;/p&gt;
 &lt;p&gt;就跟着&lt;span class=&quot;math inline&quot;&gt;\(A队*2+B队*1\)&lt;/span&gt; 大爷们去PKU签卖身契了。&lt;/p&gt;
 &lt;p&gt;可以有学上？&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="奇怪向" scheme="http://shallwe.ga/categories/%E5%A5%87%E6%80%AA%E5%90%91/"/>
+    
+    
+      <category term="奇怪向" scheme="http://shallwe.ga/tags/%E5%A5%87%E6%80%AA%E5%90%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【SDOI 2017】Round2离队滚粗记</title>
+    <link href="http://shallwe.ga/sdoi2017r2/"/>
+    <id>http://shallwe.ga/sdoi2017r2/</id>
+    <published>2017-05-28T16:00:00.000Z</published>
+    <updated>2017-05-25T03:05:13.204Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>两天省选真是让我体会到了人生无常(呵呵呵~~)。</p>
+<p>有的时候说什么“谋事在人，成事在天”， 也是很有道理的， 有些事情真的是把握不住的。</p>
+<p>该死的二轮省选对我的小心脏造成了1ww点的打击哈。。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="day--1">Day -1</h3>
+<p>从帝都昏昏碌碌地滚回了DY。</p>
+<p>作为一个CTSC、APIO炸成狗的选手，在SLYZ的某体育组(?)接受了一波帝国主义的面试培训。</p>
+<del>
+(为我进不了面试做了一波铺垫?)
+</del>
+<p>培训上就是各种婊XYM大爷？ 挺XYM大爷怒婊高考真是带劲！</p>
+<blockquote>
+<p>我感觉你们现在的这些初高中老师不行的， 看我来做个榜样让你们学习一下什么叫做素质教育！ ——XYM</p>
+</blockquote>
+<p>真是带劲， 估计只有这样霸气侧漏的选手才可以进入省队吧。</p>
+<p>回家发现妈妈狼吞虎咽了给我买的晚饭（pizza！）， 据说是自己减肥没吃晚饭结果忍不住了？？？</p>
+<h3 id="day-0">Day 0</h3>
+<p>12:00在学校食堂门口出发的， 再次成为一群文化课大佬围观的动物园集装箱。</p>
+<p>路上打了波WY， 反正就是各种掉分， 各种掉段， 各种掉线。。。</p>
+<p>到了济南时间还很早，（好像是走高速的功劳）， 拉着马胖去吃了一波米线（？！） 没错就是在四大火炉-济南，吃了一碗巨烫巨烫的鸡汤米线， 流汗.jpg。</p>
+<p>然后李老师又灌了一波鸡汤， 大体是“你们都有光明的未来”之类的。</p>
+<p>强行洗波澡疯狂复习唐老师数学题和什么3D计算几何大模板？</p>
+<p>听说你是出题人， 你放屁我都信！</p>
+<h3 id="day-1">Day 1</h3>
+<p>上午8:00准时开考， 题目读了一遍， 没什么会做的， 就先写了三个暴力(5+30+10?)。</p>
+<p>发现第三题链的情况似乎比较easy。。 必然是什么分块|线段树云云的， 先放下一会写。</p>
+<p>咦， 第一题这个部分分是不是留给我这个大常数垃圾精度FFT选手的啊？ 一会写一波！</p>
+<p>咦这个第二题我怎么没什么想法啊， 应该也有可得的部分分吧， 我想想啊！（时间一分一秒地过去， 大概想了2:00？）, 艹， 我怎么走神了， 看来这个题应该弃疗啊！</p>
+<p>还有一个小时了啊， 才45分怎么办。 看第三题好像链上部分常数超小？复杂度算出来<span class="math inline">\(10^9\)</span>但全是异或操作可以跑跑看？ 如果能跑过那线段树就只多10分啦， 那我才不想写呢。。（我也不知道哪里出现这么傲娇的想法啊！）</p>
+<p>那我就码个T1部分分！ 一波倍增+FFT20分钟写完调完还有15分钟， 测速测精度T1 貌似有60了， 但是T3 貌似常数没那么优越？ 完蛋20分部分分没了。</p>
+<p>最后60+30+10=100？ day1rk 9-12? 总排名<span class="math inline">\(10 \rightarrow 9\)</span>, 好吧还是卡着线。</p>
+<p>ISA day1rk2 瞬间翻到rk4 ？不愧是双金选手就是吊啊！</p>
+<p>下午睡睡 + 2K一波波 + 继续复习数学题+3D计算几何 ？</p>
+<p>还看了一波BIG BANG。 难道这就是死亡FLAG ？？</p>
+<h3 id="day-2">Day 2</h3>
+<p>咦这个T1我会25啊， 我spfa强行一波！咦， 应该用入边记录状态呀， 如果<span class="math inline">\(k\)</span>很小那好多入边的状态不就一样了？ 那我用点和字符串的标号hash一波状态? 能快一点？（简直在扯淡！！）。</p>
+<p>咦这个T2好坑啊， 这个方案明明是唯一的样子为什么要字典序最小啊， 我不会证啊， 写个对拍看看？ 好像没反例？ <span class="math inline">\(n^2\)</span>一波！（得到自己唯一的50分）。这怎么还有20分是五边形数啊， 前两天刚写的我怎么想不起来了呢。。完了蛋了。。</p>
+<p>这个T3是不是奇怪的后缀家族题啊？ 我YY一波（1.5h passed), 不会啊， hash来个暴力吧， 自然溢出会不会被卡啊？ 好害怕啊， 我再加个mod来个双hash ? (有病！！)</p>
+<p>好像25+50+30 ? 应该比较稳？</p>
+<p>吃饭的时候莫名其妙的心情不好。。</p>
+<p>看榜0+50+0 = 50 ? rk 25?</p>
+<p>听说你本来就卡spfa 我又用hash加了一个常数？</p>
+<p>听说你标算是自然溢出的单hash所以只要取模全部T ?</p>
+<p>听说。。。 总rk 跌到15 没进面试？</p>
+<p>大体上就是无比的生气， 真是气死气死了。</p>
+<p>我的rk曲线是11 -&gt; 10 -&gt; 9 -&gt; 15 .　最后这场day2可以说毁了我的OI生涯。</p>
+<p>算了一下自己是学了9年OI, 虽然7年都是文化课选手， 但是日久情深， 你用暴力还卡常的做法恶心我， 我真是很难过。真的是难过极了， 难过到自己已经接近退役都没察觉了。。</p>
+<p>申请了一波cd, 老师说基本没问题， 但感觉d类歧视也挺难受的， c类又巨贵好气。</p>
+<p>好好出题卡什么常数啊， 我就老老实实地打个暴力你卡什么啊。</p>
+<p>生气， 难受！</p>
+<p>9年OI一场空， D2卡常见祖宗！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;两天省选真是让我体会到了人生无常(呵呵呵~~)。&lt;/p&gt;
+&lt;p&gt;有的时候说什么“谋事在人，成事在天”， 也是很有道理的， 有些事情真的是把握不住的。&lt;/p&gt;
+&lt;p&gt;该死的二轮省选对我的小心脏造成了1ww点的打击哈。。&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>
@@ -482,9 +482,9 @@
       <category term="动态规划" scheme="http://shallwe.ga/categories/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
     
-      <category term="dp" scheme="http://shallwe.ga/tags/dp/"/>
-    
       <category term="cdq分治" scheme="http://shallwe.ga/tags/cdq%E5%88%86%E6%B2%BB/"/>
+    
+      <category term="dp" scheme="http://shallwe.ga/tags/dp/"/>
     
   </entry>
   
@@ -620,9 +620,9 @@ g(x)&amp;=\sum_{i=1}^{x} \sum_{j=1}^{i} j^k \\
       <category term="动态规划" scheme="http://shallwe.ga/categories/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
     
-      <category term="数位dp" scheme="http://shallwe.ga/tags/%E6%95%B0%E4%BD%8Ddp/"/>
-    
       <category term="dp" scheme="http://shallwe.ga/tags/dp/"/>
+    
+      <category term="数位dp" scheme="http://shallwe.ga/tags/%E6%95%B0%E4%BD%8Ddp/"/>
     
   </entry>
   
@@ -1272,11 +1272,11 @@ g(x)&amp;=\sum_{i=1}^{x} \sum_{j=1}^{i} j^k \\
     
       <category term="树链剖分" scheme="http://shallwe.ga/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
+      <category term="DP" scheme="http://shallwe.ga/tags/DP/"/>
+    
       <category term="组合数学" scheme="http://shallwe.ga/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/"/>
     
       <category term="数论" scheme="http://shallwe.ga/tags/%E6%95%B0%E8%AE%BA/"/>
-    
-      <category term="DP" scheme="http://shallwe.ga/tags/DP/"/>
     
       <category term="分块" scheme="http://shallwe.ga/tags/%E5%88%86%E5%9D%97/"/>
     
@@ -1417,9 +1417,9 @@ g(x)&amp;=\sum_{i=1}^{x} \sum_{j=1}^{i} j^k \\
     
       <category term="树状数组" scheme="http://shallwe.ga/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
-      <category term="数论" scheme="http://shallwe.ga/tags/%E6%95%B0%E8%AE%BA/"/>
-    
       <category term="DP" scheme="http://shallwe.ga/tags/DP/"/>
+    
+      <category term="数论" scheme="http://shallwe.ga/tags/%E6%95%B0%E8%AE%BA/"/>
     
       <category term="矩阵/行列式" scheme="http://shallwe.ga/tags/%E7%9F%A9%E9%98%B5-%E8%A1%8C%E5%88%97%E5%BC%8F/"/>
     
