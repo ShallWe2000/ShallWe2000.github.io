@@ -153,12 +153,10 @@ var _hmt = _hmt || [];
 <h2 id="第一个做法">第一个做法：</h2>
 <ul>
 <li>考虑数列中的数是<span class="math inline">\(distinct\)</span>的，那么可以先规定一个递增的顺序，然后乘一个全排列；</li>
-<li>观察数据范围，<span class="math inline">\(A\)</span>很大，考虑<strong>倍增</strong>，令<span class="math inline">\(f[A][n]\)</span>表示在<span class="math inline">\([1,A]\)</span>中选<span class="math inline">\(n\)</span>个数；
-<ul>
+<li>观察数据范围，<span class="math inline">\(A\)</span>很大，考虑<strong>倍增</strong>，令<span class="math inline">\(f[A][n]\)</span>表示在<span class="math inline">\([1,A]\)</span>中选<span class="math inline">\(n\)</span>个数；</li>
 <li>计算<span class="math inline">\(f[2A][n]\)</span>:记从<span class="math inline">\([A+1,2A]\)</span>中选<span class="math inline">\(n\)</span>个数的值为<span class="math inline">\(b_i\)</span>，考虑在<span class="math inline">\([1,A]\)</span>中选<span class="math inline">\(a\)</span>个数，在<span class="math inline">\([A+1,2A]\)</span>中选<span class="math inline">\(n-a\)</span>个数; <span class="math display">\[b_i= \Sigma_{j=0}^{j=i} A^{i-j} * a_j * C_{i-j}^{A-j}\]</span></li>
 <li>如何快速求<span class="math inline">\(C_{i-j}^{A-j}\)</span>,化简得 <span class="math display">\[C_{i-j}^{A-j}= \frac{(A-j)!}{(i-j)!(A-i)!}= \prod_{k=i}^{k=j}(A-k) *(i-j)!^{-1}\]</span> 这就可以做了。</li>
 <li>然后？ <span class="math display">\[f[2A][n]=f[A][a]*b[n-a]\]</span></li>
-</ul></li>
 <li>时间复杂度： <span class="math inline">\(O(log A n^2)\)</span> 可以<span class="math inline">\(fft\)</span>优化下，<span class="math inline">\(noip\)</span>后补一下；</li>
 </ul>
 <hr>
@@ -190,13 +188,13 @@ var _hmt = _hmt || [];
 <ul class="pagination">
 	 
 				
-    	<li class="prev"><a href="/uoj228/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+    	<li class="prev"><a href="/hiho1034/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
   		
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-		   <li class="next"><a href="/bzoj3107/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+		   <li class="next"><a href="/bzoj4245/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
@@ -227,7 +225,7 @@ var jiathis_config = {data_track_clickback:'true'};
   <h2 class="title">留言</h2>
 
   
-  	 <div id="uyan_frame"></div>
+	<div id="uyan_frame"></div>
   
 </section>
 
@@ -252,7 +250,7 @@ var jiathis_config = {data_track_clickback:'true'};
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/categories/数学题/">数学题<span>9</span></a></li>
+    <li><a href="/categories/数学题/">数学题<span>11</span></a></li>
   </li>
 
     </ul>
@@ -265,7 +263,7 @@ var jiathis_config = {data_track_clickback:'true'};
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/倍增/">倍增<span>7</span></a></li> <li><a href="/tags/容斥原理/">容斥原理<span>2</span></a></li> <li><a href="/tags/拉格朗日差值/">拉格朗日差值<span>1</span></a></li>
+  <li><a href="/tags/倍增/">倍增<span>8</span></a></li> <li><a href="/tags/容斥原理/">容斥原理<span>2</span></a></li> <li><a href="/tags/拉格朗日插值/">拉格朗日插值<span>2</span></a></li>
     </ul>
 	</div>
 		
@@ -289,7 +287,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
 </div><!-- row -->
  
-  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131170"></script>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131170"></script>
 
 
 
